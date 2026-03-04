@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #eaeaea;
+            background-color: #1a1a2e;
+            padding: 20px;
+        }
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #16213e;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 10px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0f3460;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #e94560;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+        .contact-info span {
+            margin: 0 10px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            color: #00adb5;
+            font-size: 18px;
+            border-left: 4px solid #e94560;
+            padding-left: 12px;
+            margin-bottom: 15px;
+        }
+        .experience-item, .education-item, .project-item {
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid #0f3460;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .item-title {
+            font-weight: bold;
+            color: #e94560;
+        }
+        .item-company {
+            color: #00adb5;
+        }
+        .item-date {
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+        .item-description {
+            color: #c0c0c0;
+            font-size: 14px;
+        }
+        .item-description ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        .item-description li {
+            margin-bottom: 5px;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            background: #0f3460;
+            color: #00adb5;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .resume-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- 个人信息 -->
+        <div class="header">
+            <h1>张三</h1>
+            <div class="contact-info">
+                <span>📧 zhangsan@email.com</span>
+                <span>📱 138-0000-0000</span>
+                <span>📍 北京市朝阳区</span>
+                <span>🔗 github.com/zhangsan</span>
+            </div>
+        </div>
+
+        <!-- 工作经历 -->
+        <div class="section">
+            <h2 class="section-title">工作经历</h2>
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <span class="item-title">高级软件工程师</span>
+                        <span class="item-company"> - ABC科技有限公司</span>
+                    </div>
+                    <span class="item-date">2021.06 - 至今</span>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>负责公司核心产品的后端架构设计与开发，提升系统性能 40%</li>
+                        <li>带领 5 人团队完成微服务改造，实现服务解耦和独立部署</li>
+                        <li>优化数据库查询，将平均响应时间从 500ms 降低至 150ms</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <span class="item-title">软件工程师</span>
+                        <span class="item-company"> - XYZ互联网公司</span>
+                    </div>
+                    <span class="item-date">2019.03 - 2021.05</span>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>参与电商平台开发，负责订单模块和支付模块的实现</li>
+                        <li>使用 Redis 实现缓存策略，提升页面加载速度 60%</li>
+                        <li>编写自动化测试脚本，测试覆盖率达到 85%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教育背景 -->
+        <div class="section">
+            <h2 class="section-title">教育背景</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <span class="item-title">计算机科学与技术 本科</span>
+                        <span class="item-company"> - 北京大学</span>
+                    </div>
+                    <span class="item-date">2015.09 - 2019.06</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目经验 -->
+        <div class="section">
+            <h2 class="section-title">项目经验</h2>
+            <div class="project-item">
+                <div class="item-header">
+                    <span class="item-title">分布式任务调度系统</span>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>基于 Spring Boot + Quartz 开发的任务调度平台</li>
+                        <li>支持任务依赖、失败重试、执行日志等功能</li>
+                        <li>日均处理任务量 10 万+</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技能清单 -->
+        <div class="section">
+            <h2 class="section-title">专业技能</h2>
+            <div class="skills-list">
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Spring Boot</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">Redis</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Kubernetes</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Linux</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
