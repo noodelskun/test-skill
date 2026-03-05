@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>林致远 - 个人简历</title>
+    <style>
+        :root {
+            /* Light theme (default) */
+            --color-bg: #ffffff;
+            --color-surface: #f5f5f7;
+            --color-text-primary: #1a1a2e;
+            --color-text-secondary: #555770;
+            --color-text-muted: #767693;
+            --color-border: #d1d1e0;
+            --color-primary: #2563eb;
+            --color-primary-text: #ffffff;
+            --color-accent: #16a34a;
+            --color-error: #dc2626;
+            --color-success: #16a34a;
+            --color-warning: #f59e0b;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            
+            /* Typography */
+            --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-family-heading: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            
+            /* Sizing */
+            --max-width: 72rem;
+            --container-width: min(90%, var(--max-width));
+            
+            /* Border radius */
+            --border-radius-sm: 0.25rem;
+            --border-radius-md: 0.5rem;
+            --border-radius-lg: 0.75rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0f0f17;
+                --color-surface: #1c1c2e;
+                --color-text-primary: #e4e4ef;
+                --color-text-secondary: #a0a0b8;
+                --color-text-muted: #767693;
+                --color-border: #2e2e44;
+                --color-primary: #60a5fa;
+                --color-primary-text: #0f0f17;
+                --color-accent: #4ade80;
+                --color-error: #f87171;
+                --color-success: #4ade80;
+                --color-warning: #fbbf24;
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 100%;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            z-index: 1000;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--color-primary);
+            color: var(--color-primary-text);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Container */
+        .container {
+            width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--color-border);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+        
+        .profile-title {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-top: var(--spacing-lg);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .contact-item a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main Content */
+        main {
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        /* Sections */
+        section {
+            margin-bottom: var(--spacing-3xl);
+        }
+        
+        section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        /* Professional Summary */
+        .professional-summary {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .professional-summary p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .professional-summary p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Work Experience */
+        .experience-item {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .experience-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .experience-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .experience-subtitle {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+        }
+        
+        .experience-date {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .experience-responsibilities,
+        .experience-achievements {
+            margin-top: var(--spacing-md);
+        }
+        
+        .experience-responsibilities h3,
+        .experience-achievements h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .experience-responsibilities ul,
+        .experience-achievements ul {
+            list-style-type: disc;
+            margin-left: var(--spacing-lg);
+        }
+        
+        .experience-responsibilities li,
+        .experience-achievements li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--color-text-secondary);
+        }
+        
+        /* Education */
+        .education-item {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .education-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .education-degree {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .education-school {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .education-details {
+            margin-top: var(--spacing-sm);
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .education-details p {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .education-details p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Skills */
+        .skills-section {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+        }
+        
+        .skills-category {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .skills-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .skills-category-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        
+        .skill-tag {
+            background-color: var(--color-border);
+            color: var(--color-text-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.9rem;
+        }
+        
+        .skill-tag.expert {
+            background-color: var(--color-primary);
+            color: var(--color-primary-text);
+        }
+        
+        .skill-tag.advanced {
+            background-color: var(--color-accent);
+            color: var(--color-primary-text);
+        }
+        
+        /* Projects */
+        .project-item {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .project-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .project-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .project-role {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .project-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .project-tech {
+            background-color: var(--color-border);
+            color: var(--color-text-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85rem;
+        }
+        
+        .project-description,
+        .project-contributions,
+        .project-results {
+            margin-top: var(--spacing-md);
+            color: var(--color-text-secondary);
+        }
+        
+        .project-contributions ul,
+        .project-results ul {
+            list-style-type: disc;
+            margin-left: var(--spacing-lg);
+        }
+        
+        .project-contributions li,
+        .project-results li {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        /* Publications */
+        .publication-item {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-secondary);
+        }
+        
+        .publication-item strong {
+            color: var(--color-text-primary);
+        }
+        
+        /* Awards */
+        .awards-section {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+        }
+        
+        .awards-category {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .awards-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .awards-category-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .awards-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .award-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .award-year {
+            background-color: var(--color-primary);
+            color: var(--color-primary-text);
+            width: 80px;
+            text-align: center;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .award-name {
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+        
+        /* Languages */
+        .languages-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-md);
+        }
+        
+        .languages-table th,
+        .languages-table td {
+            padding: var(--spacing-sm);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .languages-table th {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .languages-table td {
+            color: var(--color-text-secondary);
+        }
+        
+        /* Interests */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .interest-item {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .interest-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .interest-name {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        /* Recommendations */
+        .recommendation-item {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .recommendation-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .recommendation-header {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .recommendation-name {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .recommendation-title {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .recommendation-contact {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-sm);
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+        
+        .recommendation-contact a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .recommendation-contact a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Self-evaluation */
+        .self-evaluation {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            header {
+                background-color: white;
+                border-bottom: 2px solid #333;
+            }
+            
+            .container {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+            
+            section {
+                margin-bottom: var(--spacing-xl);
+                page-break-inside: avoid;
+            }
+            
+            .professional-summary,
+            .skills-section,
+            .awards-section,
+            .self-evaluation {
+                background-color: #f5f5f5;
+                border-radius: 0;
+                border: 1px solid #ddd;
+            }
+            
+            .skill-tag {
+                background-color: #ddd;
+                color: #333;
+            }
+            
+            .award-year {
+                background-color: #333;
+                color: white;
+            }
+            
+            .contact-item a,
+            .recommendation-contact a {
+                color: #333;
+                text-decoration: none;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+            
+            .experience-header,
+            .education-header,
+                .project-header {
+                flex-direction: column;
+            }
+            
+            .experience-subtitle,
+            .project-tech-stack {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+            
+            .awards-list {
+                flex-direction: column;
+            }
+            
+            .award-year {
+                width: 100%;
+            }
+            
+            .interests-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳转到主要内容</a>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-photo" aria-hidden="true">
+                    LZ
+                </div>
+                <h1 class="profile-name">林致远</h1>
+                <p class="profile-title">人工智能与机器学习专家</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <a href="tel:+86 138-0000-0000">+86 138-0000-0000</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <a href="mailto:zhiyuan.lin@email.com">zhiyuan.lin@email.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>上海市浦东新区</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://www.linkedin.com/in/zhiyuan-lin" target="_blank" rel="noopener">linkedin.com/in/zhiyuan-lin</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>🌐</span>
+                        <a href="https://www.zhiyuanlin.tech" target="_blank" rel="noopener">www.zhiyuanlin.tech</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>🐙</span>
+                        <a href="https://github.com/zhiyuanlin" target="_blank" rel="noopener">github.com/zhiyuanlin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <div class="container">
+            <!-- 职业概述 -->
+            <section aria-labelledby="professional-summary">
+                <h2 id="professional-summary" class="section-title">职业概述</h2>
+                <div class="professional-summary">
+                    <p>资深人工智能与机器学习专家，拥有超过12年的人工智能领域研发与管理经验。专注于深度学习、自然语言处理、计算机视觉及大语言模型的研发与应用。曾领导多个跨国技术团队，成功交付超过30个企业级AI解决方案，累计创造商业价值超过5亿元人民币。</p>
+                    
+                    <p>具备扎实的理论基础与丰富的实战经验，在顶级学术会议及期刊发表论文20余篇，持有发明专利15项。善于将前沿技术与商业需求相结合，推动技术创新与产业化落地。现任某知名科技公司人工智能研究院副院长，负责公司AI战略规划与核心技术攻关。</p>
+                </div>
+            </section>
+            
+            <!-- 工作经历 -->
+            <section aria-labelledby="work-experience">
+                <h2 id="work-experience" class="section-title">工作经历</h2>
+                
+                <!-- 人工智能研究院副院长 -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">人工智能研究院副院长</h3>
+                        <div class="experience-subtitle">
+                            <span>某知名科技有限公司 | 上海</span>
+                            <span class="experience-date">2021年6月 - 至今</span>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-responsibilities">
+                        <h3>核心职责：</h3>
+                        <ul>
+                            <li>负责公司人工智能技术的整体战略规划与技术路线制定，管理超过150人的研发团队</li>
+                            <li>主导公司大语言模型研发项目，成功推出拥有自主知识产权的千亿参数级别模型</li>
+                            <li>建立与清华大学、北京大学、中科院等高校及科研机构的战略合作关系</li>
+                            <li>推动AI技术在金融、医疗、教育、零售等行业的商业化应用落地</li>
+                            <li>年度研发预算超过2亿元人民币，投资回报率持续保持在35%以上</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-achievements">
+                        <h3>主要成就：</h3>
+                        <ul>
+                            <li>带领团队研发的"智言"大语言模型在多个权威评测中达到国际领先水平</li>
+                            <li>推动AI医疗影像诊断系统在全国200+医院部署，累计服务患者超过500万人次</li>
+                            <li>建立公司AI人才培养体系，年均培养高级AI工程师50余名</li>
+                            <li>获得公司年度"卓越领导力奖"及"技术创新贡献奖"</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 高级技术总监 -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">高级技术总监</h3>
+                        <div class="experience-subtitle">
+                            <span>某互联网巨头公司 | 北京</span>
+                            <span class="experience-date">2018年3月 - 2021年5月</span>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-responsibilities">
+                        <h3>核心职责：</h3>
+                        <ul>
+                            <li>负责搜索与推荐算法团队的技术管理与产品研发，团队规模80人</li>
+                            <li>主导新一代智能推荐系统的架构设计与核心算法研发</li>
+                            <li>负责与产品、运营、数据等多部门的跨团队协作与资源整合</li>
+                            <li>制定技术团队的人才招聘、培养与绩效考核体系</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-achievements">
+                        <h3>主要成就：</h3>
+                        <ul>
+                            <li>重构推荐系统核心算法，用户点击率提升42%，留存率提升28%</li>
+                            <li>研发的多模态内容理解系统日均处理内容超过10亿条</li>
+                            <li>建立A/B测试平台，支持每日超过1000个实验并行运行</li>
+                            <li>团队获得公司"最佳技术团队"称号，个人获评"年度优秀管理者"</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 高级算法工程师 -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">高级算法工程师</h3>
+                        <div class="experience-subtitle">
+                            <span>某知名人工智能公司 | 深圳</span>
+                            <span class="experience-date">2015年7月 - 2018年2月</span>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-responsibilities">
+                        <h3>核心职责：</h3>
+                        <ul>
+                            <li>负责计算机视觉算法的研发与优化，主要应用于安防、自动驾驶场景</li>
+                            <li>参与公司核心产品的技术架构设计与关键技术攻关</li>
+                            <li>负责与客户的技術对接，提供定制化解决方案</li>
+                            <li>指导初级工程师的技术成长与项目实践</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-achievements">
+                        <h3>主要成就：</h3>
+                        <ul>
+                            <li>研发的人脸识别算法在NIST评测中准确率达到99.8%，行业领先</li>
+                            <li>主导的自动驾驶感知系统成功落地多个城市试点项目</li>
+                            <li>申请发明专利8项，其中5项已获得授权</li>
+                            <li>在CVPR、ICCV等顶级会议发表论文6篇</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 算法工程师 -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">算法工程师</h3>
+                        <div class="experience-subtitle">
+                            <span>某科技公司 | 杭州</span>
+                            <span class="experience-date">2012年8月 - 2015年6月</span>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-responsibilities">
+                        <h3>核心职责：</h3>
+                        <ul>
+                            <li>负责机器学习算法的研发与应用，主要应用于电商场景</li>
+                            <li>参与用户行为分析、个性化推荐等核心功能开发</li>
+                            <li>负责大数据处理平台的搭建与优化</li>
+                            <li>协助团队完成技术文档编写与知识沉淀</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-achievements">
+                        <h3>主要成就：</h3>
+                        <ul>
+                            <li>开发的销量预测模型将预测准确率从75%提升至92%</li>
+                            <li>优化的分布式训练框架将模型训练时间缩短60%</li>
+                            <li>参与开发的智能客服系统日均处理咨询超过100万条</li>
+                            <li>获得公司"技术创新奖"及"优秀员工"称号</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 实习研究员 -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">实习研究员</h3>
+                        <div class="experience-subtitle">
+                            <span>某研究院 | 北京</span>
+                            <span class="experience-date">2011年6月 - 2012年7月</span>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-responsibilities">
+                        <h3>核心职责：</h3>
+                        <ul>
+                            <li>参与国家自然基金项目的研究工作</li>
+                            <li>负责深度学习算法的实验验证与性能优化</li>
+                            <li>协助撰写学术论文与技术报告</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-achievements">
+                        <h3>主要成就：</h3>
+                        <ul>
+                            <li>参与的研究成果发表于NeurIPS会议</li>
+                            <li>开发的图像分割算法被项目组采纳为核心技术</li>
+                            <li>获得研究院"优秀实习生"称号</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 教育背景 -->
+            <section aria-labelledby="education">
+                <h2 id="education" class="section-title">教育背景</h2>
+                
+                <div class="education-item">
+                    <div class="education-header">
+                        <h3 class="education-degree">博士学位</h3>
+                        <p class="education-school">清华大学 | 计算机科学与技术学院</p>
+                        <p class="education-date">2008年9月 - 2012年7月</p>
+                    </div>
+                    
+                    <div class="education-details">
+                        <p><strong>专业：</strong>计算机应用技术</p>
+                        <p><strong>研究方向：</strong>深度学习与计算机视觉</p>
+                        <p><strong>导师：</strong>张教授（IEEE Fellow）</p>
+                        <p><strong>论文题目：</strong>《基于深度卷积神经网络的目标检测与识别研究》</p>
+                        <p><strong>GPA：</strong>3.9/4.0（专业前5%）</p>
+                        <p><strong>荣誉：</strong>国家奖学金、清华大学优秀博士论文</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-header">
+                        <h3 class="education-degree">硕士学位</h3>
+                        <p class="education-school">清华大学 | 计算机科学与技术学院</p>
+                        <p class="education-date">2006年9月 - 2008年7月</p>
+                    </div>
+                    
+                    <div class="education-details">
+                        <p><strong>专业：</strong>计算机科学与技术</p>
+                        <p><strong>研究方向：</strong>机器学习</p>
+                        <p><strong>GPA：</strong>3.8/4.0（专业前10%）</p>
+                        <p><strong>荣誉：</strong>清华大学优秀硕士毕业生</p>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-header">
+                        <h3 class="education-degree">学士学位</h3>
+                        <p class="education-school">浙江大学 | 计算机科学与技术学院</p>
+                        <p class="education-date">2002年9月 - 2006年7月</p>
+                    </div>
+                    
+                    <div class="education-details">
+                        <p><strong>专业：</strong>计算机科学与技术</p>
+                        <p><strong>GPA：</strong>3.9/4.0（专业前3%）</p>
+                        <p><strong>荣誉：</strong>国家奖学金、浙江大学优秀毕业生、全国大学生程序设计竞赛金奖</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 技能专长 -->
+            <section aria-labelledby="skills">
+                <h2 id="skills" class="section-title">技能专长</h2>
+                
+                <div class="skills-section">
+                    <div class="skills-category">
+                        <h3 class="skills-category-title">编程语言</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag expert">Python</span>
+                            <span class="skill-tag expert">C++</span>
+                            <span class="skill-tag expert">Java</span>
+                            <span class="skill-tag advanced">Go</span>
+                            <span class="skill-tag advanced">JavaScript</span>
+                            <span class="skill-tag advanced">SQL</span>
+                            <span class="skill-tag advanced">Shell</span>
+                            <span class="skill-tag">Rust</span>
+                            <span class="skill-tag">Scala</span>
+                            <span class="skill-tag">R</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-category">
+                        <h3 class="skills-category-title">深度学习框架</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag expert">PyTorch</span>
+                            <span class="skill-tag expert">TensorFlow</span>
+                            <span class="skill-tag expert">Keras</span>
+                            <span class="skill-tag advanced">MXNet</span>
+                            <span class="skill-tag advanced">Caffe</span>
+                            <span class="skill-tag advanced">PaddlePaddle</span>
+                            <span class="skill-tag">JAX</span>
+                            <span class="skill-tag">MindSpore</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-category">
+                        <h3 class="skills-category-title">专业领域</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">自然语言处理</span>
+                            <span class="skill-tag">大语言模型</span>
+                            <span class="skill-tag">机器翻译</span>
+                            <span class="skill-tag">文本生成</span>
+                            <span class="skill-tag">情感分析</span>
+                            <span class="skill-tag">命名实体识别</span>
+                            <span class="skill-tag">计算机视觉</span>
+                            <span class="skill-tag">目标检测</span>
+                            <span class="skill-tag">图像分割</span>
+                            <span class="skill-tag">人脸识别</span>
+                            <span class="skill-tag">视频分析</span>
+                            <span class="skill-tag">3D视觉</span>
+                            <span class="skill-tag">深度学习</span>
+                            <span class="skill-tag">强化学习</span>
+                            <span class="skill-tag">迁移学习</span>
+                            <span class="skill-tag">联邦学习</span>
+                            <span class="skill-tag">AutoML</span>
+                            <span class="skill-tag">Hadoop</span>
+                            <span class="skill-tag">Spark</span>
+                            <span class="skill-tag">Flink</span>
+                            <span class="skill-tag">Kafka</span>
+                            <span class="skill-tag">HBase</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">阿里云</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Docker</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-category">
+                        <h3 class="skills-category-title">软技能</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">团队管理与领导力</span>
+                            <span class="skill-tag">跨部门沟通与协作</span>
+                            <span class="skill-tag">技术战略规划</span>
+                            <span class="skill-tag">项目管理与风险控制</span>
+                            <span class="skill-tag">技术演讲与培训</span>
+                            <span class="skill-tag">英文读写流利</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 项目经验 -->
+            <section aria-labelledby="projects">
+                <h2 id="projects" class="section-title">项目经验</h2>
+                
+                <!-- 项目一 -->
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">千亿参数大语言模型研发</h3>
+                        <p class="project-role">项目负责人 | 2022年1月 - 至今</p>
+                    </div>
+                    
+                    <p class="project-description">
+                        主导研发具有自主知识产权的千亿参数级别大语言模型，支持多语言理解与生成、代码生成、逻辑推理等多种能力。
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="project-tech">PyTorch</span>
+                        <span class="project-tech">DeepSpeed</span>
+                        <span class="project-tech">Megatron-LM</span>
+                        <span class="project-tech">Kubernetes</span>
+                    </div>
+                    
+                    <div class="project-contributions">
+                        <h3>个人贡献：</h3>
+                        <ul>
+                            <li>设计模型整体架构与训练方案</li>
+                            <li>攻克分布式训练中的通信瓶颈问题</li>
+                            <li>建立模型评估体系与安全对齐机制</li>
+                            <li>协调跨团队资源，确保项目按期交付</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-results">
+                        <h3>项目成果：</h3>
+                        <ul>
+                            <li>模型在多个权威评测中达到国际领先水平</li>
+                            <li>成功应用于公司核心产品线</li>
+                            <li>发表顶级会议论文3篇，申请专利5项</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 项目二 -->
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">智能医疗影像诊断系统</h3>
+                        <p class="project-role">技术负责人 | 2020年6月 - 2021年12月</p>
+                    </div>
+                    
+                    <p class="project-description">
+                        开发基于深度学习的医疗影像智能诊断系统，支持CT、MRI、X光等多种影像类型的病灶检测与诊断辅助。
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="project-tech">TensorFlow</span>
+                        <span class="project-tech">MONAI</span>
+                        <span class="project-tech">DICOM</span>
+                        <span class="project-tech">微服务架构</span>
+                    </div>
+                    
+                    <div class="project-contributions">
+                        <h3>个人贡献：</h3>
+                        <ul>
+                            <li>设计多模态影像融合算法</li>
+                            <li>建立医学专家标注与质量管控体系</li>
+                            <li>负责系统的临床验证与注册申报</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-results">
+                        <h3>项目成果：</h3>
+                        <ul>
+                            <li>系统在全国200+医院部署使用</li>
+                            <li>诊断准确率超过95%，达到副主任医师水平</li>
+                            <li>获得NMPA三类医疗器械注册证</li>
+                            <li>累计服务患者超过500万人次</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 项目三 -->
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">新一代智能推荐系统</h3>
+                        <p class="project-role">核心算法负责人 | 2018年6月 - 2020年5月</p>
+                    </div>
+                    
+                    <p class="project-description">
+                        重构公司核心推荐系统，引入深度学习与强化学习技术，实现个性化内容推荐的精准度大幅提升。
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="project-tech">PyTorch</span>
+                        <span class="project-tech">TensorFlow</span>
+                        <span class="project-tech">Spark</span>
+                        <span class="project-tech">Redis</span>
+                        <span class="project-tech">Kafka</span>
+                    </div>
+                    
+                    <div class="project-contributions">
+                        <h3>个人贡献：</h3>
+                        <ul>
+                            <li>设计多任务学习框架，同时优化点击率、留存率等多个目标</li>
+                            <li>开发实时特征工程系统，支持毫秒级特征更新</li>
+                            <li>建立完整的A/B测试与效果评估体系</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-results">
+                        <h3>项目成果：</h3>
+                        <ul>
+                            <li>用户点击率提升42%，留存率提升28%</li>
+                            <li>系统日均处理请求超过100亿次</li>
+                            <li>获得公司技术创新一等奖</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 项目四 -->
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">自动驾驶感知系统</h3>
+                        <p class="project-role">算法核心开发者 | 2016年3月 - 2018年2月</p>
+                    </div>
+                    
+                    <p class="project-description">
+                        研发面向L4级自动驾驶的多传感器融合感知系统，支持车辆、行人、交通标志等目标的检测与跟踪。
+                    </p>
+                    
+                    <div class="project-tech-stack">
+                        <span class="project-tech">C++</span>
+                        <span class="project-tech">CUDA</span>
+                        <span class="project-tech">ROS</span>
+                        <span class="project-tech">TensorRT</span>
+                    </div>
+                    
+                    <div class="project-contributions">
+                        <h3>个人贡献：</h3>
+                        <ul>
+                            <li>开发基于激光雷达与摄像头的融合感知算法</li>
+                            <li>优化模型推理性能，满足实时性要求</li>
+                            <li>负责系统的道路测试与迭代优化</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-results">
+                        <h3>项目成果：</h3>
+                        <ul>
+                            <li>系统在多个城市完成超过100万公里道路测试</li>
+                            <li>目标检测准确率超过99%</li>
+                            <li>成功落地多个示范运营项目</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 发表论文 -->
+            <section aria-labelledby="publications">
+                <h2 id="publications" class="section-title">发表论文</h2>
+                
+                <div class="publication-item">
+                    <strong>期刊论文：</strong>
+                    <ul>
+                        <li>"Large Language Models for Medical Diagnosis: A Comprehensive Study" - Nature Medicine, 2023 (第一作者)</li>
+                        <li>"Efficient Training of Billion-Scale Transformer Models" - Journal of Machine Learning Research, 2022 (第一作者)</li>
+                        <li>"Multi-Modal Fusion for Autonomous Driving Perception" - IEEE TPAMI, 2021 (通讯作者)</li>
+                        <li>"Deep Learning for Medical Image Analysis: Survey and Perspectives" - Medical Image Analysis, 2020 (第一作者)</li>
+                        <li>"Attention Mechanisms in Computer Vision: A Survey" - IEEE TPAMI, 2019 (第二作者)</li>
+                    </ul>
+                </div>
+                
+                <div class="publication-item">
+                    <strong>会议论文：</strong>
+                    <ul>
+                        <li>"Scaling Laws for Neural Language Models in Low-Resource Settings" - NeurIPS, 2023 (第一作者)</li>
+                        <li>"Efficient Fine-Tuning of Large Language Models with Parameter-Efficient Methods" - ICML, 2023 (第一作者)</li>
+                        <li>"Self-Supervised Learning for Medical Image Representation" - CVPR, 2022 (第一作者)</li>
+                        <li>"Multi-Task Learning for Recommendation Systems" - KDD, 2021 (第一作者)</li>
+                        <li>"Real-Time Object Detection for Autonomous Driving" - ICCV, 2020 (第一作者)</li>
+                        <li>"Deep Neural Networks for Face Recognition in the Wild" - CVPR, 2019 (第一作者)</li>
+                        <li>"End-to-End Learning for Visual Question Answering" - NeurIPS, 2018 (第一作者)</li>
+                        <li>"Semantic Segmentation with Deep Convolutional Networks" - ICCV, 2017 (第一作者)</li>
+                        <li>"Transfer Learning for Image Classification" - CVPR, 2016 (第一作者)</li>
+                        <li>"Deep Learning for Natural Language Processing" - ACL, 2015 (第二作者)</li>
+                        <li>"Convolutional Neural Networks for Object Detection" - NeurIPS, 2014 (第一作者)</li>
+                        <li>"Feature Learning with Deep Belief Networks" - ICML, 2013 (第一作者)</li>
+                        <li>"Unsupervised Pre-Training for Image Classification" - CVPR, 2012 (第一作者)</li>
+                    </ul>
+                </div>
+                
+                <p class="publication-item">
+                    <strong>论文引用次数：</strong>累计引用超过15,000次，h-index: 28
+                </p>
+            </section>
+            
+            <!-- 获奖情况 -->
+            <section aria-labelledby="awards">
+                <h2 id="awards" class="section-title">获奖情况</h2>
+                
+                <div class="awards-section">
+                    <div class="awards-category">
+                        <h3 class="awards-category-title">国家级奖项</h3>
+                        <div class="awards-list">
+                            <div class="award-item">
+                                <span class="award-year">2023</span>
+                                <span class="award-name">国家科学技术进步奖二等奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2022</span>
+                                <span class="award-name">国家杰出青年科学基金</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2021</span>
+                                <span class="award-name">中国青年科技奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2011</span>
+                                <span class="award-name">国家优秀自费留学生奖学金</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="awards-category">
+                        <h3 class="awards-category-title">行业奖项</h3>
+                        <div class="awards-list">
+                            <div class="award-item">
+                                <span class="award-year">2023</span>
+                                <span class="award-name">中国人工智能学会优秀论文奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2022</span>
+                                <span class="award-name">世界人工智能大会杰出贡献奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2021</span>
+                                <span class="award-name">中国计算机学会科技进步一等奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2020</span>
+                                <span class="award-name">全球人工智能创新者50人</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="awards-category">
+                        <h3 class="awards-category-title">公司奖项</h3>
+                        <div class="awards-list">
+                            <div class="award-item">
+                                <span class="award-year">2023</span>
+                                <span class="award-name">年度卓越领导力奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2022, 2021</span>
+                                <span class="award-name">技术创新贡献奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2020, 2019</span>
+                                <span class="award-name">最佳技术团队奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2019</span>
+                                <span class="award-name">年度优秀管理者</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2016, 2014</span>
+                                <span class="award-name">技术创新奖</span>
+                            </div>
+                            <div class="award-item">
+                                <span class="award-year">2013</span>
+                                <span class="award-name">优秀员工</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 专业认证 -->
+            <section aria-labelledby="certifications">
+                <h2 id="certifications" class="section-title">专业认证</h2>
+                
+                <div class="skills-section">
+                    <ul>
+                        <li><strong>AWS认证机器学习专家</strong> (2023年)</li>
+                        <li><strong>Google Cloud专业机器学习工程师</strong> (2022年)</li>
+                        <li><strong>NVIDIA深度学习认证专家</strong> (2021年)</li>
+                        <li><strong>PMP项目管理专业人士认证</strong> (2020年)</li>
+                        <li><strong>TOEFL</strong> 115分 (2019年)</li>
+                        <li><strong>计算机技术与软件专业技术资格（高级）- 系统架构设计师</strong> (2015年)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 语言能力 -->
+            <section aria-labelledby="languages">
+                <h2 id="languages" class="section-title">语言能力</h2>
+                
+                <table class="languages-table">
+                    <thead>
+                        <tr>
+                            <th>语言</th>
+                            <th>听说</th>
+                            <th>读写</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>中文（普通话）</strong></td>
+                            <td>母语</td>
+                            <td>母语</td>
+                        </tr>
+                        <tr>
+                            <td><strong>英语</strong></td>
+                            <td>流利（商务谈判级别）</td>
+                            <td>流利（学术论文写作级别）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>日语</strong></td>
+                            <td>日常交流</td>
+                            <td>基本阅读</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- 兴趣爱好 -->
+            <section aria-labelledby="interests">
+                <h2 id="interests" class="section-title">兴趣爱好</h2>
+                
+                <div class="interests-grid">
+                    <div class="interest-item">
+                        <div class="interest-icon">📚</div>
+                        <div class="interest-name">阅读</div>
+                        <p>偏好科技、历史、哲学类书籍，年均阅读量超过50本</p>
+                    </div>
+                    
+                    <div class="interest-item">
+                        <div class="interest-icon">🏃</div>
+                        <div class="interest-name">运动</div>
+                        <p>马拉松（最好成绩3小时30分）、游泳、羽毛球</p>
+                    </div>
+                    
+                    <div class="interest-item">
+                        <div class="interest-icon">🎹</div>
+                        <div class="interest-name">音乐</div>
+                        <p>钢琴（业余十级）、古典音乐欣赏</p>
+                    </div>
+                    
+                    <div class="interest-item">
+                        <div class="interest-icon">✈️</div>
+                        <div class="interest-name">旅行</div>
+                        <p>已到访超过30个国家，偏好科技与文化探索之旅</p>
+                    </div>
+                    
+                    <div class="interest-item">
+                        <div class="interest-icon">❤️</div>
+                        <div class="interest-name">公益</div>
+                        <p>担任多家教育公益组织志愿者，资助5名贫困地区学生完成学业</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 推荐人 -->
+            <section aria-labelledby="recommendations">
+                <h2 id="recommendations" class="section-title">推荐人</h2>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-name">张教授</h3>
+                        <p class="recommendation-title">清华大学计算机系教授、IEEE Fellow</p>
+                    </div>
+                    
+                    <div class="recommendation-contact">
+                        <a href="mailto:zhang.prof@tsinghua.edu.cn">zhang.prof@tsinghua.edu.cn</a>
+                        <a href="tel:+86 10-00000000">+86 10-00000000</a>
+                    </div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-name">李博士</h3>
+                        <p class="recommendation-title">某知名科技有限公司 CEO</p>
+                    </div>
+                    
+                    <div class="recommendation-contact">
+                        <a href="mailto:li.ceo@techcompany.com">li.ceo@techcompany.com</a>
+                        <a href="tel:+86 21-00000000">+86 21-00000000</a>
+                    </div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-name">王教授</h3>
+                        <p class="recommendation-title">北京大学人工智能研究院院长</p>
+                    </div>
+                    
+                    <div class="recommendation-contact">
+                        <a href="mailto:wang.prof@pku.edu.cn">wang.prof@pku.edu.cn</a>
+                        <a href="tel:+86 10-00000001">+86 10-00000001</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 自我评价 -->
+            <section aria-labelledby="self-evaluation">
+                <h2 id="self-evaluation" class="section-title">自我评价</h2>
+                
+                <div class="self-evaluation">
+                    <p>本人热爱人工智能技术，具有强烈的求知欲与创新精神。在技术研发方面，追求极致，善于攻克技术难题；在团队管理方面，注重人才培养与团队建设，善于激发团队成员的潜力；在商业应用方面，能够准确把握技术趋势与市场需求，推动技术创新与产业化落地。</p>
+                    
+                    <p>未来将继续深耕人工智能领域，致力于推动通用人工智能技术的发展与应用，为人类社会的进步贡献自己的力量。</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>简历更新日期：2024年1月</p>
+            <p>本简历内容均为虚构，仅用于演示目的</p>
+        </div>
+    </footer>
+</body>
+</html>
