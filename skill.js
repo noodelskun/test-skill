@@ -22,14 +22,26 @@ const agent = createDeepAgent({
 
 const render = async () => {
     const time = new Date().getTime();
+    const usageTotals = { prompt: 0, completion: 0, total: 0 };
+    const callbacks = [{
+        handleLLMEnd: async (output) => {
+            const u = output?.llmOutput?.tokenUsage || output?.llmOutput?.usage || {};
+            const p = u?.promptTokens ?? u?.prompt_tokens ?? 0;
+            const c = u?.completionTokens ?? u?.completion_tokens ?? 0;
+            const t = u?.totalTokens ?? u?.total_tokens ?? (p + c);
+            usageTotals.prompt += p;
+            usageTotals.completion += c;
+            usageTotals.total += t;
+        }
+    }];
     const result = await agent.stream({
         messages: [
             new HumanMessage({
                 content: `读取 虚拟人物简历.md 根据其内容生成一份html简历,不要额外添加任何信息,
-                文件命名为test6.html如果已有该文件则test后序号递增,严格按照web设计指南生成,要注意文字大小以及排版合理`,
+                文件命名为test10.html如果已有该文件则test后序号递增,严格按照web设计指南生成,要注意文字大小以及排版合理,使用html-render 技能来指导生成`,
             }),
         ]
-    }, { streamMode: 'values' });
+    }, { streamMode: 'values', callbacks });
     for await (const chunk of result) {
         for (const message of chunk.messages) {
             console.log('--------------ALL START---------------')
@@ -51,6 +63,7 @@ const render = async () => {
     }
     const time2 = new Date().getTime();
     console.log(`耗时: ${time2 - time}ms`);
+    console.log(`Token 消耗: 输入 ${usageTotals.prompt} + 输出 ${usageTotals.completion} = 总计 ${usageTotals.total}`);
 }
 try {
 render();
