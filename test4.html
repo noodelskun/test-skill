@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林致远 - 个人简历</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=DotGothic16&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           PIXEL ART CSS VARIABLES & RESET
+           ======================================== */
+        :root {
+            --px: 4px;
+            
+            /* Retro Palette - NES inspired (15 colors) */
+            --color-bg-dark: #0d0e15;
+            --color-bg-panel: #1a1c29;
+            --color-bg-light: #2d3147;
+            
+            --color-primary: #5e81ac;
+            --color-primary-light: #81a1c1;
+            --color-accent: #bf616a;
+            --color-accent-light: #ebcb8b;
+            --color-success: #a3be8c;
+            --color-info: #88c0d0;
+            
+            --color-text-main: #eceff4;
+            --color-text-muted: #a3be8c;
+            --color-border: #4c566a;
+            --color-border-light: #81a1c1;
+            
+            --font-pixel: 'VT323', 'DotGothic16', monospace;
+            --font-heading: 'DotGothic16', 'VT323', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-pixel);
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-main);
+            line-height: calc(1.5 * var(--px));
+            font-size: calc(1.2 * var(--px));
+        }
+
+        /* ========================================
+           CRT SCANLINE EFFECTS
+           ======================================== */
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .crt-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent calc(var(--px)),
+                rgba(0, 0, 0, 0.15) calc(var(--px)),
+                rgba(0, 0, 0, 0.15) calc(calc(var(--px) + var(--px)))
+            );
+            animation: scanline-move 8s linear infinite;
+        }
+
+        @keyframes scanline-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
+        }
+
+        .crt-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                transparent 70%,
+                rgba(0, 0, 0, 0.2) 100%
+            );
+        }
+
+        /* ========================================
+           SKIP LINK (Accessibility)
+           ======================================== */
+        .skip-link {
+            position: absolute;
+            top: calc(-5 * var(--px));
+            left: 0;
+            background: var(--color-primary);
+            color: var(--color-bg-dark);
+            padding: calc(1 * var(--px)) calc(2 * var(--px));
+            z-index: 10000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ========================================
+           PIXEL BORDERS (Box Shadow Technique)
+           ======================================== */
+        .pixel-border {
+            position: relative;
+            background: var(--color-bg-panel);
+        }
+
+        .pixel-border::before {
+            content: '';
+            position: absolute;
+            inset: calc(-1 * var(--px));
+            padding: calc(var(--px) * 2);
+            background: 
+                linear-gradient(to right, var(--color-border-light) 50%, transparent 50%),
+                linear-gradient(to right, var(--color-border-light) 50%, transparent 50%),
+                linear-gradient(to bottom, var(--color-border-light) 50%, transparent 50%),
+                linear-gradient(to bottom, var(--color-border-light) 50%, transparent 50%);
+            background-size: calc(var(--px) * 2) calc(var(--px) * 2);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-position: 
+                0 0,
+                calc(100% - var(--px)) 0,
+                0 0,
+                0 calc(100% - var(--px));
+            mask-image: 
+                linear-gradient(to bottom, transparent 0, transparent calc(2 * var(--px)), black calc(2 * var(--px)), black calc(calc(100% - 2 * var(--px))), transparent calc(calc(100% - 2 * var(--px))), transparent 100%),
+                linear-gradient(to right, transparent 0, transparent calc(2 * var(--px)), black calc(2 * var(--px)), black calc(calc(100% - 2 * var(--px))), transparent calc(calc(100% - 2 * var(--px))), transparent 100%);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Simple pixel border alternative */
+        .pixel-box {
+            position: relative;
+            background: var(--color-bg-panel);
+        }
+
+        .pixel-box::before,
+        .pixel-box::after {
+            content: '';
+            position: absolute;
+            width: calc(var(--px) * 2);
+            height: calc(var(--px) * 2);
+        }
+
+        .pixel-box::before {
+            top: calc(-1 * var(--px));
+            left: calc(-1 * var(--px));
+            background: 
+                var(--color-border-light) calc(var(--px)) 0 0 0,
+                var(--color-border-light) 0 calc(var(--px)) 0 0;
+            box-shadow: 
+                calc(var(--px)) 0 0 0 var(--color-border-light),
+                0 calc(var(--px)) 0 0 var(--color-border-light),
+                calc(var(--px)) calc(var(--px)) 0 0 var(--color-border-light);
+        }
+
+        .pixel-box::after {
+            bottom: calc(-1 * var(--px));
+            right: calc(-1 * var(--px));
+            background: 
+                var(--color-border-light) calc(-1 * var(--px)) 0 0 0,
+                var(--color-border-light) 0 calc(-1 * var(--px)) 0 0;
+            box-shadow: 
+                calc(-1 * var(--px)) 0 0 0 var(--color-border-light),
+                0 calc(-1 * var(--px)) 0 0 var(--color-border-light),
+                calc(-1 * var(--px)) calc(-1 * var(--px)) 0 0 var(--color-border-light);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .container {
+            max-width: calc(1200 * var(--px));
+            margin: 0 auto;
+            padding: calc(4 * var(--px));
+        }
+
+        /* ========================================
+           HEADER / HERO SECTION
+           ======================================== */
+        header {
+            text-align: center;
+            padding: calc(8 * var(--px)) 0;
+            margin-bottom: calc(6 * var(--px));
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: calc(var(--px) * 2);
+            background: 
+                linear-gradient(90deg, 
+                    var(--color-primary) calc(var(--px) * 4),
+                    var(--color-accent) calc(var(--px) * 4),
+                    var(--color-accent) calc(var(--px) * 8),
+                    var(--color-info) calc(var(--px) * 8),
+                    var(--color-info) calc(var(--px) * 12),
+                    var(--color-success) calc(var(--px) * 12),
+                    var(--color-success) calc(var(--px) * 16),
+                    var(--color-accent-light) calc(var(--px) * 16),
+                    var(--color-accent-light) calc(var(--px) * 20),
+                    var(--color-primary) calc(var(--px) * 20)
+                );
+            margin-bottom: calc(4 * var(--px));
+            image-rendering: pixelated;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: calc(3.5 * var(--px));
+            color: var(--color-primary-light);
+            text-shadow: 
+                calc(2 * var(--px)) 0 var(--color-primary),
+                calc(-2 * var(--px)) 0 var(--color-accent);
+            margin-bottom: calc(2 * var(--px));
+            letter-spacing: calc(var(--px) * 0.5);
+        }
+
+        .subtitle {
+            font-size: calc(1.8 * var(--px));
+            color: var(--color-text-muted);
+            margin-bottom: calc(3 * var(--px));
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: calc(3 * var(--px));
+            list-style: none;
+        }
+
+        .contact-info li {
+            font-size: calc(1.2 * var(--px));
+        }
+
+        .contact-info a {
+            color: var(--color-info);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .contact-info a:hover,
+        .contact-info a:focus {
+            color: var(--color-accent-light);
+            text-decoration: underline;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: calc(-1 * var(--px));
+            left: 0;
+            width: 0;
+            height: calc(var(--px) * 0.5);
+            background: var(--color-info);
+            transition: width 0.1s steps(4);
+        }
+
+        .contact-info a:hover::after,
+        .contact-info a:focus::after {
+            width: 100%;
+        }
+
+        /* ========================================
+           MAIN CONTENT AREA
+           ======================================== */
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(4 * var(--px));
+        }
+
+        @media (min-width: calc(900 * var(--px))) {
+            main {
+                grid-template-columns: calc(35 * var(--px)) 1fr;
+            }
+        }
+
+        /* ========================================
+           SIDEBAR NAVIGATION
+           ======================================== */
+        aside.nav-sidebar {
+            position: sticky;
+            top: calc(4 * var(--px));
+            height: fit-content;
+        }
+
+        .nav-list {
+            list-style: none;
+            position: relative;
+        }
+
+        .nav-list::before {
+            content: '';
+            position: absolute;
+            left: calc(-1 * var(--px));
+            top: 0;
+            height: 100%;
+            width: calc(var(--px) * 2);
+            background: var(--color-bg-light);
+        }
+
+        .nav-item {
+            margin-bottom: calc(var(--px) * 0.5);
+        }
+
+        .nav-link {
+            display: block;
+            padding: calc(1 * var(--px)) calc(2 * var(--px));
+            color: var(--color-text-main);
+            text-decoration: none;
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-pixel);
+            font-size: calc(1.2 * var(--px));
+            text-align: left;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            background: var(--color-bg-light);
+            color: var(--color-primary-light);
+            outline: none;
+        }
+
+        .nav-link:focus-visible {
+            box-shadow: 
+                inset calc(var(--px)) 0 0 0 var(--color-primary),
+                inset calc(-1 * var(--px)) 0 0 0 var(--color-primary),
+                inset 0 calc(var(--px)) 0 0 var(--color-primary),
+                inset 0 calc(-1 * var(--px)) 0 0 var(--color-primary);
+        }
+
+        .nav-link.active {
+            background: var(--color-primary);
+            color: var(--color-bg-dark);
+            font-weight: bold;
+        }
+
+        /* ========================================
+           SECTIONS
+           ======================================== */
+        section {
+            padding: calc(3 * var(--px));
+            position: relative;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: calc(2 * var(--px));
+            color: var(--color-primary-light);
+            margin-bottom: calc(2 * var(--px));
+            padding-bottom: calc(1 * var(--px));
+            border-bottom: calc(var(--px) * 2) solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: calc(1 * var(--px));
+        }
+
+        .section-title::before {
+            content: attr(data-icon);
+            filter: grayscale(0.3);
+        }
+
+        /* ========================================
+           PERSONAL INFO TABLE
+           ======================================== */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: calc(1.1 * var(--px));
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: calc(1 * var(--px)) calc(2 * var(--px));
+            text-align: left;
+            border-bottom: calc(var(--px)) solid var(--color-border);
+        }
+
+        .info-table th {
+            background: var(--color-bg-light);
+            color: var(--color-primary-light);
+            width: calc(25 * var(--px));
+            font-weight: bold;
+        }
+
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-table a {
+            color: var(--color-info);
+            text-decoration: none;
+        }
+
+        .info-table a:hover,
+        .info-table a:focus {
+            color: var(--color-accent-light);
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           CARDS FOR EXPERIENCE/PROJECTS
+           ======================================== */
+        .card {
+            background: var(--color-bg-light);
+            padding: calc(2 * var(--px)) calc(3 * var(--px));
+            margin-bottom: calc(3 * var(--px));
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: calc(1 * var(--px));
+            gap: calc(1 * var(--px));
+        }
+
+        .card-title {
+            font-size: calc(1.4 * var(--px));
+            color: var(--color-primary-light);
+            font-weight: bold;
+        }
+
+        .card-subtitle {
+            font-size: calc(1.1 * var(--px));
+            color: var(--color-text-muted);
+        }
+
+        .card-date {
+            font-size: calc(1 * var(--px));
+            color: var(--color-info);
+            background: var(--color-bg-dark);
+            padding: calc(0.5 * var(--px)) calc(1 * var(--px));
+        }
+
+        .card-section {
+            margin-top: calc(1.5 * var(--px));
+        }
+
+        .card-section-title {
+            font-size: calc(1.1 * var(--px));
+            color: var(--color-accent-light);
+            margin-bottom: calc(0.5 * var(--px));
+            font-weight: bold;
+        }
+
+        .card-section ul {
+            list-style: none;
+            padding-left: calc(2 * var(--px));
+        }
+
+        .card-section ul li {
+            position: relative;
+            margin-bottom: calc(0.5 * var(--px));
+        }
+
+        .card-section ul li::before {
+            content: '▸';
+            position: absolute;
+            left: calc(-1 * var(--px));
+            color: var(--color-primary);
+        }
+
+        /* ========================================
+           SKILLS GRID
+           ======================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(2 * var(--px));
+        }
+
+        @media (min-width: calc(600 * var(--px))) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .skill-category {
+            background: var(--color-bg-light);
+            padding: calc(2 * var(--px));
+        }
+
+        .skill-category-title {
+            font-size: calc(1.2 * var(--px));
+            color: var(--color-primary-light);
+            margin-bottom: calc(1 * var(--px));
+            padding-bottom: calc(0.5 * var(--px));
+            border-bottom: calc(var(--px)) solid var(--color-border);
+        }
+
+        .skill-level {
+            margin-bottom: calc(1 * var(--px));
+        }
+
+        .skill-name {
+            font-size: calc(1.1 * var(--px));
+            margin-bottom: calc(0.5 * var(--px));
+        }
+
+        .skill-bar {
+            height: calc(var(--px) * 2);
+            background: var(--color-bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                var(--color-primary) 0%,
+                var(--color-primary-light) 100%
+            );
+            position: relative;
+        }
+
+        .skill-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: calc(var(--px) * 2);
+            height: 100%;
+            background: var(--color-accent);
+        }
+
+        /* ========================================
+           LIST STYLES
+           ======================================== */
+        .list-pub,
+        .list-awards {
+            list-style: none;
+        }
+
+        .list-pub li,
+        .list-awards li {
+            padding: calc(1 * var(--px)) 0;
+            border-bottom: calc(var(--px)) solid var(--color-border);
+        }
+
+        .list-pub li:last-child,
+        .list-awards li:last-child {
+            border-bottom: none;
+        }
+
+        .pub-year {
+            display: inline-block;
+            background: var(--color-bg-dark);
+            padding: calc(0.3 * var(--px)) calc(1 * var(--px));
+            margin-right: calc(1 * var(--px));
+            font-size: calc(0.9 * var(--px));
+            color: var(--color-info);
+        }
+
+        .pub-author {
+            color: var(--color-accent-light);
+            font-size: calc(0.95 * var(--px));
+        }
+
+        /* ========================================
+           LANGUAGES TABLE
+           ======================================== */
+        .lang-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .lang-table th,
+        .lang-table td {
+            padding: calc(1 * var(--px)) calc(1.5 * var(--px));
+            text-align: left;
+            border-bottom: calc(var(--px)) solid var(--color-border);
+        }
+
+        .lang-table th {
+            background: var(--color-bg-light);
+            color: var(--color-primary-light);
+        }
+
+        .lang-level {
+            display: inline-flex;
+            align-items: center;
+            gap: calc(0.5 * var(--px));
+        }
+
+        .lang-dot {
+            width: calc(var(--px) * 2);
+            height: calc(var(--px) * 2);
+            background: var(--color-success);
+        }
+
+        .lang-dot.medium {
+            background: var(--color-accent-light);
+        }
+
+        .lang-dot.low {
+            background: var(--color-border);
+        }
+
+        /* ========================================
+           REFERENCES
+           ======================================== */
+        .reference-card {
+            background: var(--color-bg-light);
+            padding: calc(2 * var(--px)) calc(3 * var(--px));
+            margin-bottom: calc(2 * var(--px));
+        }
+
+        .ref-name {
+            font-size: calc(1.3 * var(--px));
+            color: var(--color-primary-light);
+            margin-bottom: calc(0.5 * var(--px));
+        }
+
+        .ref-title {
+            font-size: calc(1.1 * var(--px));
+            color: var(--color-text-muted);
+            margin-bottom: calc(1 * var(--px));
+        }
+
+        .ref-contact {
+            font-size: calc(1 * var(--px));
+            color: var(--color-info);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        footer {
+            text-align: center;
+            padding: calc(4 * var(--px)) 0;
+            margin-top: calc(6 * var(--px));
+            border-top: calc(var(--px) * 2) solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: calc(1 * var(--px));
+        }
+
+        footer p {
+            margin-bottom: calc(0.5 * var(--px));
+        }
+
+        /* ========================================
+           ACCESSIBILITY - FOCUS VISIBLE
+           ======================================== */
+        :focus-visible {
+            outline: calc(var(--px) * 2) solid var(--color-primary);
+            outline-offset: calc(var(--px) * 0.5);
+        }
+
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* ========================================
+           HOVER EFFECTS
+           ======================================== */
+        .card:hover,
+        .skill-category:hover {
+            background: #363b52;
+        }
+
+        .card:hover {
+            transform: translate(calc(var(--px) * -0.5), calc(var(--px) * -0.5));
+        }
+
+        /* ========================================
+           RESPONSIVE ADJUSTMENTS
+           ======================================== */
+        @media (max-width: calc(600 * var(--px))) {
+            .container {
+                padding: calc(2 * var(--px));
+            }
+
+            h1 {
+                font-size: calc(2.8 * var(--px));
+            }
+
+            .subtitle {
+                font-size: calc(1.5 * var(--px));
+            }
+
+            .section-title {
+                font-size: calc(1.6 * var(--px));
+            }
+
+            .card-header {
+                flex-direction: column;
+            }
+        }
+
+        /* ========================================
+           PRINT STYLES
+           ======================================== */
+        @media print {
+            .crt-overlay {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .pixel-box,
+            .card,
+            .skill-category,
+            .reference-card {
+                background: white;
+                border: calc(var(--px) * 2) solid black;
+            }
+
+            .section-title {
+                border-bottom: calc(var(--px) * 2) solid black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">跳转到主要内容</a>
+
+    <!-- CRT Overlay Effect -->
+    <div class="crt-overlay" aria-hidden="true"></div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>林致远 (Lin Zhiyuan)</h1>
+            <p class="subtitle">资深人工智能与机器学习专家</p>
+            <ul class="contact-info">
+                <li>📞 +86 138-0000-0000</li>
+                <li>✉️ zhiyuan.lin@email.com</li>
+                <li>📍 上海市浦东新区</li>
+                <li>🔗 linkedin.com/in/zhiyuan-lin</li>
+                <li>💻 github.com/zhiyuanlin</li>
+                <li>🌐 www.zhiyuanlin.tech</li>
+            </ul>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Sidebar Navigation -->
+            <aside class="nav-sidebar" role="navigation" aria-label="简历导航">
+                <nav>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#personal-info" class="nav-link active">个人信息</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#overview" class="nav-link">职业概述</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#experience" class="nav-link">工作经历</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#education" class="nav-link">教育背景</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#skills" class="nav-link">技能专长</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#projects" class="nav-link">项目经验</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#publications" class="nav-link">发表论文</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#awards" class="nav-link">获奖情况</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#certifications" class="nav-link">专业认证</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#languages" class="nav-link">语言能力</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#references" class="nav-link">推荐人</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Content Sections -->
+            <section id="personal-info" class="pixel-box" aria-labelledby="personal-info-title">
+                <h2 id="personal-info-title" class="section-title" data-icon="📋">个人信息</h2>
+                <table class="info-table">
+                    <tr>
+                        <th>性别</th>
+                        <td>男</td>
+                    </tr>
+                    <tr>
+                        <th>出生日期</th>
+                        <td>1988 年 3 月 15 日</td>
+                    </tr>
+                    <tr>
+                        <th>国籍</th>
+                        <td>中国</td>
+                    </tr>
+                    <tr>
+                        <th>现居地</th>
+                        <td>上海市浦东新区</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="overview" class="pixel-box" aria-labelledby="overview-title">
+                <h2 id="overview-title" class="section-title" data-icon="🎯">职业概述</h2>
+                <p>资深人工智能与机器学习专家，拥有超过 12 年的人工智能领域研发与管理经验。专注于深度学习、自然语言处理、计算机视觉及大语言模型的研发与应用。曾领导多个跨国技术团队，成功交付超过 30 个企业级 AI 解决方案，累计创造商业价值超过 5 亿元人民币。</p>
+                <br>
+                <p>具备扎实的理论基础与丰富的实战经验，在顶级学术会议及期刊发表论文 20 余篇，持有发明专利 15 项。善于将前沿技术与商业需求相结合，推动技术创新与产业化落地。现任某知名科技公司人工智能研究院副院长，负责公司 AI 战略规划与核心技术攻关。</p>
+            </section>
+
+            <section id="experience" class="pixel-box" aria-labelledby="experience-title">
+                <h2 id="experience-title" class="section-title" data-icon="💼">工作经历</h2>
+                
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">人工智能研究院副院长</div>
+                            <div class="card-subtitle">某知名科技有限公司 | 上海</div>
+                        </div>
+                        <span class="card-date">2021 年 6 月 - 至今</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">核心职责：</div>
+                        <ul>
+                            <li>负责公司人工智能技术的整体战略规划与技术路线制定，管理超过 150 人的研发团队</li>
+                            <li>主导公司大语言模型研发项目，成功推出拥有自主知识产权的千亿参数级别模型</li>
+                            <li>建立与清华大学、北京大学、中科院等高校及科研机构的战略合作关系</li>
+                            <li>推动 AI 技术在金融、医疗、教育、零售等行业的商业化应用落地</li>
+                            <li>年度研发预算超过 2 亿元人民币，投资回报率持续保持在 35% 以上</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">主要成就：</div>
+                        <ul>
+                            <li>带领团队研发的"智言"大语言模型在多个权威评测中达到国际领先水平</li>
+                            <li>推动 AI 医疗影像诊断系统在全国 200+ 医院部署，累计服务患者超过 500 万人次</li>
+                            <li>建立公司 AI 人才培养体系，年均培养高级 AI 工程师 50 余名</li>
+                            <li>获得公司年度"卓越领导力奖"及"技术创新贡献奖"</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">高级技术总监</div>
+                            <div class="card-subtitle">某互联网巨头公司 | 北京</div>
+                        </div>
+                        <span class="card-date">2018 年 3 月 - 2021 年 5 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">核心职责：</div>
+                        <ul>
+                            <li>负责搜索与推荐算法团队的技术管理与产品研发，团队规模 80 人</li>
+                            <li>主导新一代智能推荐系统的架构设计与核心算法研发</li>
+                            <li>负责与产品、运营、数据等多部门的跨团队协作与资源整合</li>
+                            <li>制定技术团队的人才招聘、培养与绩效考核体系</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">主要成就：</div>
+                        <ul>
+                            <li>重构推荐系统核心算法，用户点击率提升 42%，留存率提升 28%</li>
+                            <li>研发的多模态内容理解系统日均处理内容超过 10 亿条</li>
+                            <li>建立 A/B 测试平台，支持每日超过 1000 个实验并行运行</li>
+                            <li>团队获得公司"最佳技术团队"称号，个人获评"年度优秀管理者"</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">高级算法工程师</div>
+                            <div class="card-subtitle">某知名人工智能公司 | 深圳</div>
+                        </div>
+                        <span class="card-date">2015 年 7 月 - 2018 年 2 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">核心职责：</div>
+                        <ul>
+                            <li>负责计算机视觉算法的研发与优化，主要应用于安防、自动驾驶场景</li>
+                            <li>参与公司核心产品的技术架构设计与关键技术攻关</li>
+                            <li>负责与客户的技術对接，提供定制化解决方案</li>
+                            <li>指导初级工程师的技术成长与项目实践</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">主要成就：</div>
+                        <ul>
+                            <li>研发的人脸识别算法在 NIST 评测中准确率达到 99.8%，行业领先</li>
+                            <li>主导的自动驾驶感知系统成功落地多个城市试点项目</li>
+                            <li>申请发明专利 8 项，其中 5 项已获得授权</li>
+                            <li>在 CVPR、ICCV 等顶级会议发表论文 6 篇</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">算法工程师</div>
+                            <div class="card-subtitle">某科技公司 | 杭州</div>
+                        </div>
+                        <span class="card-date">2012 年 8 月 - 2015 年 6 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">核心职责：</div>
+                        <ul>
+                            <li>负责机器学习算法的研发与应用，主要应用于电商场景</li>
+                            <li>参与用户行为分析、个性化推荐等核心功能开发</li>
+                            <li>负责大数据处理平台的搭建与优化</li>
+                            <li>协助团队完成技术文档编写与知识沉淀</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">主要成就：</div>
+                        <ul>
+                            <li>开发的销量预测模型将预测准确率从 75% 提升至 92%</li>
+                            <li>优化的分布式训练框架将模型训练时间缩短 60%</li>
+                            <li>参与开发的智能客服系统日均处理咨询超过 100 万条</li>
+                            <li>获得公司"技术创新奖"及"优秀员工"称号</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">实习研究员</div>
+                            <div class="card-subtitle">某研究院 | 北京</div>
+                        </div>
+                        <span class="card-date">2011 年 6 月 - 2012 年 7 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">核心职责：</div>
+                        <ul>
+                            <li>参与国家自然基金项目的研究工作</li>
+                            <li>负责深度学习算法的实验验证与性能优化</li>
+                            <li>协助撰写学术论文与技术报告</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">主要成就：</div>
+                        <ul>
+                            <li>参与的研究成果发表于 NeurIPS 会议</li>
+                            <li>开发的图像分割算法被项目组采纳为核心技术</li>
+                            <li>获得研究院"优秀实习生"称号</li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+            <section id="education" class="pixel-box" aria-labelledby="education-title">
+                <h2 id="education-title" class="section-title" data-icon="🎓">教育背景</h2>
+                
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">博士学位</div>
+                            <div class="card-subtitle">清华大学 | 计算机科学与技术学院</div>
+                        </div>
+                        <span class="card-date">2008 年 9 月 - 2012 年 7 月</span>
+                    </div>
+                    <ul>
+                        <li>专业：计算机应用技术</li>
+                        <li>研究方向：深度学习与计算机视觉</li>
+                        <li>导师：张教授（IEEE Fellow）</li>
+                        <li>论文题目：《基于深度卷积神经网络的目标检测与识别研究》</li>
+                        <li>GPA：3.9/4.0（专业前 5%）</li>
+                        <li>荣誉：国家奖学金、清华大学优秀博士论文</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">硕士学位</div>
+                            <div class="card-subtitle">清华大学 | 计算机科学与技术学院</div>
+                        </div>
+                        <span class="card-date">2006 年 9 月 - 2008 年 7 月</span>
+                    </div>
+                    <ul>
+                        <li>专业：计算机科学与技术</li>
+                        <li>研究方向：机器学习</li>
+                        <li>GPA：3.8/4.0（专业前 10%）</li>
+                        <li>荣誉：清华大学优秀硕士毕业生</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">学士学位</div>
+                            <div class="card-subtitle">浙江大学 | 计算机科学与技术学院</div>
+                        </div>
+                        <span class="card-date">2002 年 9 月 - 2006 年 7 月</span>
+                    </div>
+                    <ul>
+                        <li>专业：计算机科学与技术</li>
+                        <li>GPA：3.9/4.0（专业前 3%）</li>
+                        <li>荣誉：国家奖学金、浙江大学优秀毕业生、全国大学生程序设计竞赛金奖</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="skills" class="pixel-box" aria-labelledby="skills-title">
+                <h2 id="skills-title" class="section-title" data-icon="🔧">技能专长</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">编程语言</h3>
+                        <div class="skill-level">
+                            <div class="skill-name">精通：Python、C++、Java</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">熟练：Go、JavaScript、SQL、Shell</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">了解：Rust、Scala、R</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 50%"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">深度学习框架</h3>
+                        <div class="skill-level">
+                            <div class="skill-name">精通：PyTorch、TensorFlow、Keras</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 100%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">熟练：MXNet、Caffe、PaddlePaddle</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">了解：JAX、MindSpore</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 50%"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">专业领域</h3>
+                        <div class="skill-level">
+                            <div class="skill-name">自然语言处理：大语言模型、机器翻译、文本生成</div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">计算机视觉：目标检测、图像分割、人脸识别</div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">机器学习：深度学习、强化学习、迁移学习</div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">大数据技术：Hadoop、Spark、Flink、Kafka</div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">云计算：AWS、Azure、阿里云、Kubernetes</div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">软技能</h3>
+                        <div class="skill-level">
+                            <div class="skill-name">团队管理与领导力</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">跨部门沟通与协作</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">技术战略规划</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">项目管理与风险控制</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-name">英文读写流利（TOEFL 115 分）</div>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="pixel-box" aria-labelledby="projects-title">
+                <h2 id="projects-title" class="section-title" data-icon="🚀">项目经验</h2>
+                
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">千亿参数大语言模型研发</div>
+                            <div class="card-subtitle">项目负责人</div>
+                        </div>
+                        <span class="card-date">2022 年 1 月 - 至今</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目描述：</div>
+                        <p>主导研发具有自主知识产权的千亿参数级别大语言模型，支持多语言理解与生成、代码生成、逻辑推理等多种能力。</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">技术栈：</div>
+                        <p>PyTorch、DeepSpeed、Megatron-LM、Kubernetes</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">个人贡献：</div>
+                        <ul>
+                            <li>设计模型整体架构与训练方案</li>
+                            <li>攻克分布式训练中的通信瓶颈问题</li>
+                            <li>建立模型评估体系与安全对齐机制</li>
+                            <li>协调跨团队资源，确保项目按期交付</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目成果：</div>
+                        <ul>
+                            <li>模型在多个权威评测中达到国际领先水平</li>
+                            <li>成功应用于公司核心产品线</li>
+                            <li>发表顶级会议论文 3 篇，申请专利 5 项</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">智能医疗影像诊断系统</div>
+                            <div class="card-subtitle">技术负责人</div>
+                        </div>
+                        <span class="card-date">2020 年 6 月 - 2021 年 12 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目描述：</div>
+                        <p>开发基于深度学习的医疗影像智能诊断系统，支持 CT、MRI、X 光等多种影像类型的病灶检测与诊断辅助。</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">技术栈：</div>
+                        <p>TensorFlow、MONAI、DICOM、微服务架构</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目成果：</div>
+                        <ul>
+                            <li>系统在全国 200+ 医院部署使用</li>
+                            <li>诊断准确率超过 95%，达到副主任医师水平</li>
+                            <li>获得 NMPA 三类医疗器械注册证</li>
+                            <li>累计服务患者超过 500 万人次</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">新一代智能推荐系统</div>
+                            <div class="card-subtitle">核心算法负责人</div>
+                        </div>
+                        <span class="card-date">2018 年 6 月 - 2020 年 5 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目描述：</div>
+                        <p>重构公司核心推荐系统，引入深度学习与强化学习技术，实现个性化内容推荐的精准度大幅提升。</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">技术栈：</div>
+                        <p>PyTorch、TensorFlow、Spark、Redis、Kafka</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目成果：</div>
+                        <ul>
+                            <li>用户点击率提升 42%，留存率提升 28%</li>
+                            <li>系统日均处理请求超过 100 亿次</li>
+                            <li>获得公司技术创新一等奖</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">自动驾驶感知系统</div>
+                            <div class="card-subtitle">算法核心开发者</div>
+                        </div>
+                        <span class="card-date">2016 年 3 月 - 2018 年 2 月</span>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目描述：</div>
+                        <p>研发面向 L4 级自动驾驶的多传感器融合感知系统，支持车辆、行人、交通标志等目标的检测与跟踪。</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">技术栈：</div>
+                        <p>C++、CUDA、ROS、TensorRT</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="card-section-title">项目成果：</div>
+                        <ul>
+                            <li>系统在多个城市完成超过 100 万公里道路测试</li>
+                            <li>目标检测准确率超过 99%</li>
+                            <li>成功落地多个示范运营项目</li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+            <section id="publications" class="pixel-box" aria-labelledby="publications-title">
+                <h2 id="publications-title" class="section-title" data-icon="📚">发表论文</h2>
+                
+                <h3 class="card-section-title">期刊论文</h3>
+                <ul class="list-pub">
+                    <li><span class="pub-year">2023</span>"Large Language Models for Medical Diagnosis: A Comprehensive Study" - <em>Nature Medicine</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2022</span>"Efficient Training of Billion-Scale Transformer Models" - <em>JMLR</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2021</span>"Multi-Modal Fusion for Autonomous Driving Perception" - <em>IEEE TPAMI</em> <span class="pub-author">(通讯作者)</span></li>
+                    <li><span class="pub-year">2020</span>"Deep Learning for Medical Image Analysis: Survey and Perspectives" - <em>Medical Image Analysis</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2019</span>"Attention Mechanisms in Computer Vision: A Survey" - <em>IEEE TPAMI</em> <span class="pub-author">(第二作者)</span></li>
+                </ul>
+                
+                <br>
+                
+                <h3 class="card-section-title">会议论文</h3>
+                <ul class="list-pub">
+                    <li><span class="pub-year">2023</span>"Scaling Laws for Neural Language Models in Low-Resource Settings" - <em>NeurIPS</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2023</span>"Efficient Fine-Tuning of Large Language Models with Parameter-Efficient Methods" - <em>ICML</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2022</span>"Self-Supervised Learning for Medical Image Representation" - <em>CVPR</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2021</span>"Multi-Task Learning for Recommendation Systems" - <em>KDD</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2020</span>"Real-Time Object Detection for Autonomous Driving" - <em>ICCV</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2019</span>"Deep Neural Networks for Face Recognition in the Wild" - <em>CVPR</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2018</span>"End-to-End Learning for Visual Question Answering" - <em>NeurIPS</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2017</span>"Semantic Segmentation with Deep Convolutional Networks" - <em>ICCV</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2016</span>"Transfer Learning for Image Classification" - <em>CVPR</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2015</span>"Deep Learning for Natural Language Processing" - <em>ACL</em> <span class="pub-author">(第二作者)</span></li>
+                    <li><span class="pub-year">2014</span>"Convolutional Neural Networks for Object Detection" - <em>NeurIPS</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2013</span>"Feature Learning with Deep Belief Networks" - <em>ICML</em> <span class="pub-author">(第一作者)</span></li>
+                    <li><span class="pub-year">2012</span>"Unsupervised Pre-Training for Image Classification" - <em>CVPR</em> <span class="pub-author">(第一作者)</span></li>
+                </ul>
+                
+                <br>
+                <p style="color: var(--color-info); font-size: calc(1.1 * var(--px));">论文引用次数：累计引用超过 15,000 次，h-index: 28</p>
+            </section>
+
+            <section id="awards" class="pixel-box" aria-labelledby="awards-title">
+                <h2 id="awards-title" class="section-title" data-icon="🏆">获奖情况</h2>
+                
+                <h3 class="card-section-title">国家级奖项</h3>
+                <ul class="list-awards">
+                    <li>国家科学技术进步奖二等奖（2023 年）</li>
+                    <li>国家杰出青年科学基金（2022 年）</li>
+                    <li>中国青年科技奖（2021 年）</li>
+                    <li>国家优秀自费留学生奖学金（2011 年）</li>
+                </ul>
+                
+                <br>
+                
+                <h3 class="card-section-title">行业奖项</h3>
+                <ul class="list-awards">
+                    <li>中国人工智能学会优秀论文奖（2023 年）</li>
+                    <li>世界人工智能大会杰出贡献奖（2022 年）</li>
+                    <li>中国计算机学会科技进步一等奖（2021 年）</li>
+                    <li>全球人工智能创新者 50 人（2020 年）</li>
+                </ul>
+                
+                <br>
+                
+                <h3 class="card-section-title">公司奖项</h3>
+                <ul class="list-awards">
+                    <li>年度卓越领导力奖（2023 年）</li>
+                    <li>技术创新贡献奖（2022 年、2021 年）</li>
+                    <li>最佳技术团队奖（2020 年、2019 年）</li>
+                    <li>年度优秀管理者（2019 年）</li>
+                    <li>技术创新奖（2016 年、2014 年）</li>
+                    <li>优秀员工（2013 年）</li>
+                </ul>
+            </section>
+
+            <section id="certifications" class="pixel-box" aria-labelledby="certifications-title">
+                <h2 id="certifications-title" class="section-title" data-icon="📜">专业认证</h2>
+                <ul class="list-awards">
+                    <li>AWS 认证机器学习专家 (2023 年)</li>
+                    <li>Google Cloud 专业机器学习工程师 (2022 年)</li>
+                    <li>NVIDIA 深度学习认证专家 (2021 年)</li>
+                    <li>PMP 项目管理专业人士认证 (2020 年)</li>
+                    <li>TOEFL 115 分 (2019 年)</li>
+                    <li>计算机技术与软件专业技术资格（高级）- 系统架构设计师 (2015 年)</li>
+                </ul>
+            </section>
+
+            <section id="languages" class="pixel-box" aria-labelledby="languages-title">
+                <h2 id="languages-title" class="section-title" data-icon="🌐">语言能力</h2>
+                <table class="lang-table">
+                    <thead>
+                        <tr>
+                            <th>语言</th>
+                            <th>听说</th>
+                            <th>读写</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>中文（普通话）</strong></td>
+                            <td>
+                                <span class="lang-level">
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="lang-level">
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>英语</strong></td>
+                            <td>
+                                <span class="lang-level">
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot medium"></span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="lang-level">
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>日语</strong></td>
+                            <td>
+                                <span class="lang-level">
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot low"></span>
+                                    <span class="lang-dot low"></span>
+                                    <span class="lang-dot low"></span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="lang-level">
+                                    <span class="lang-dot"></span>
+                                    <span class="lang-dot low"></span>
+                                    <span class="lang-dot low"></span>
+                                    <span class="lang-dot low"></span>
+                                    <span class="lang-dot low"></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="references" class="pixel-box" aria-labelledby="references-title">
+                <h2 id="references-title" class="section-title" data-icon="👥">推荐人</h2>
+                
+                <article class="reference-card">
+                    <div class="ref-name">张教授</div>
+                    <div class="ref-title">清华大学计算机系教授、IEEE Fellow</div>
+                    <div class="ref-contact">
+                        📧 zhang.prof@tsinghua.edu.cn<br>
+                        📞 +86 10-00000000
+                    </div>
+                </article>
+
+                <article class="reference-card">
+                    <div class="ref-name">李博士</div>
+                    <div class="ref-title">某知名科技有限公司 CEO</div>
+                    <div class="ref-contact">
+                        📧 li.ceo@techcompany.com<br>
+                        📞 +86 21-00000000
+                    </div>
+                </article>
+
+                <article class="reference-card">
+                    <div class="ref-name">王教授</div>
+                    <div class="ref-title">北京大学人工智能研究院院长</div>
+                    <div class="ref-contact">
+                        📧 wang.prof@pku.edu.cn<br>
+                        📞 +86 10-00000001
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>简历更新日期：2024 年 1 月</p>
+            <p>本简历内容均为虚构，仅用于演示目的</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Interactive Features -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Get target section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Scroll to section with offset
+                const headerOffset = 20;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for active nav highlighting
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -40% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            const focusableElements = document.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.key === 'Tab') {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

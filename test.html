@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>林致远 - 个人简历</title>
+  <link rel="stylesheet" href="/skills/html-render/theme/var.css">
+  <style>
+    /* 基础重置与全局样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    /* 简历容器 */
+    .resume {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: var(--bg-secondary);
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    /* 头部区域 */
+    .resume__header {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--purple-accent) 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .resume__name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .resume__title {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+    }
+
+    /* 主题切换按钮 */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      padding: 0.625rem 1.25rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-elevated);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 内容区域 */
+    .resume__content {
+      padding: 2rem;
+    }
+
+    /* 章节样式 */
+    .resume__section {
+      margin-bottom: 2.5rem;
+    }
+
+    .resume__section:last-child {
+      margin-bottom: 0;
+    }
+
+    .resume__section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 个人信息表格 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      padding: 0.75rem 1rem;
+      background-color: var(--bg-tertiary);
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .info-item:hover {
+      background-color: var(--bg-elevated);
+      transform: translateX(4px);
+    }
+
+    .info-item__label {
+      font-weight: 600;
+      color: var(--text-secondary);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+
+    .info-item__value {
+      color: var(--text-primary);
+      word-break: break-word;
+    }
+
+    /* 职业概述 */
+    .summary-text {
+      color: var(--text-primary);
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .summary-text p {
+      margin-bottom: 1rem;
+    }
+
+    .summary-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 工作经历 */
+    .experience-item {
+      background-color: var(--bg-tertiary);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.2s ease;
+      border-left: 4px solid var(--accent-primary);
+    }
+
+    .experience-item:hover {
+      background-color: var(--bg-elevated);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .experience-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-item__header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 0.5rem;
+    }
+
+    .experience-item__title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .experience-item__company {
+      color: var(--accent-primary);
+      font-weight: 500;
+    }
+
+    .experience-item__period {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      background-color: var(--bg-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+    }
+
+    .experience-item__location {
+      color: var(--text-tertiary);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .experience-item__section {
+      margin-bottom: 1rem;
+    }
+
+    .experience-item__section:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-item__section-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .experience-item__list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .experience-item__list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    .experience-item__list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-item__list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: bold;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .resume__header {
+        padding: 2rem 1rem;
+      }
+
+      .resume__name {
+        font-size: 1.75rem;
+      }
+
+      .resume__content {
+        padding: 1.5rem 1rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-item__header {
+        flex-direction: column;
+      }
+
+      .theme-toggle {
+        top: auto;
+        bottom: 1rem;
+        right: 1rem;
+      }
+    }
+
+    /* 暗色主题支持 - 通过 body 添加 dark-theme 类切换 */
+    body.dark-theme {
+      background-color: var(--bg-primary);
+    }
+
+    body.dark-theme .resume {
+      background-color: var(--bg-secondary);
+    }
+  </style>
+</head>
+<body>
+  <!-- 主题切换按钮 -->
+  <button class="theme-toggle" onclick="document.body.classList.toggle('dark-theme')">
+    🌓 切换主题
+  </button>
+
+  <div class="resume">
+    <!-- 头部 -->
+    <header class="resume__header">
+      <h1 class="resume__name">林致远</h1>
+      <p class="resume__title">Lin Zhiyuan | 资深人工智能与机器学习专家</p>
+    </header>
+
+    <!-- 内容区域 -->
+    <div class="resume__content">
+      <!-- 个人信息 -->
+      <section class="resume__section">
+        <h2 class="resume__section-title">
+          <span>📋</span> 个人信息
+        </h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-item__label">姓名</span>
+            <span class="info-item__value">林致远 (Lin Zhiyuan)</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">性别</span>
+            <span class="info-item__value">男</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">出生日期</span>
+            <span class="info-item__value">1988年3月15日</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">国籍</span>
+            <span class="info-item__value">中国</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">现居地</span>
+            <span class="info-item__value">上海市浦东新区</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">联系电话</span>
+            <span class="info-item__value">+86 138-0000-0000</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">电子邮箱</span>
+            <span class="info-item__value">zhiyuan.lin@email.com</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">LinkedIn</span>
+            <span class="info-item__value">linkedin.com/in/zhiyuan-lin</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">个人网站</span>
+            <span class="info-item__value">www.zhiyuanlin.tech</span>
+          </div>
+          <div class="info-item">
+            <span class="info-item__label">GitHub</span>
+            <span class="info-item__value">github.com/zhiyuanlin</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 职业概述 -->
+      <section class="resume__section">
+        <h2 class="resume__section-title">
+          <span>🎯</span> 职业概述
+        </h2>
+        <div class="summary-text">
+          <p>资深人工智能与机器学习专家，拥有超过12年的人工智能领域研发与管理经验。专注于深度学习、自然语言处理、计算机视觉及大语言模型的研发与应用。曾领导多个跨国技术团队，成功交付超过30个企业级AI解决方案，累计创造商业价值超过5亿元人民币。</p>
+          <p>具备扎实的理论基础与丰富的实战经验，在顶级学术会议及期刊发表论文20余篇，持有发明专利15项。善于将前沿技术与商业需求相结合，推动技术创新与产业化落地。现任某知名科技公司人工智能研究院副院长，负责公司AI战略规划与核心技术攻关。</p>
+        </div>
+      </section>
+
+      <!-- 工作经历 -->
+      <section class="resume__section">
+        <h2 class="resume__section-title">
+          <span>💼</span> 工作经历
+        </h2>
+
+        <!-- 工作经历 1 -->
+        <div class="experience-item">
+          <div class="experience-item__header">
+            <div>
+              <h3 class="experience-item__title">人工智能研究院副院长</h3>
+              <p class="experience-item__company">某知名科技有限公司</p>
+            </div>
+            <span class="experience-item__period">2021年6月 - 至今</span>
+          </div>
+          <p class="experience-item__location">📍 上海</p>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">核心职责</h4>
+            <ul class="experience-item__list">
+              <li>负责公司人工智能技术的整体战略规划与技术路线制定，管理超过150人的研发团队</li>
+              <li>主导公司大语言模型研发项目，成功推出拥有自主知识产权的千亿参数级别模型</li>
+              <li>建立与清华大学、北京大学、中科院等高校及科研机构的战略合作关系</li>
+              <li>推动AI技术在金融、医疗、教育、零售等行业的商业化应用落地</li>
+              <li>年度研发预算超过2亿元人民币，投资回报率持续保持在35%以上</li>
+            </ul>
+          </div>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">主要成就</h4>
+            <ul class="experience-item__list">
+              <li>带领团队研发的"智言"大语言模型在多个权威评测中达到国际领先水平</li>
+              <li>推动AI医疗影像诊断系统在全国200+医院部署，累计服务患者超过500万人次</li>
+              <li>建立公司AI人才培养体系，年均培养高级AI工程师50余名</li>
+              <li>获得公司年度"卓越领导力奖"及"技术创新贡献奖"</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 工作经历 2 -->
+        <div class="experience-item">
+          <div class="experience-item__header">
+            <div>
+              <h3 class="experience-item__title">高级技术总监</h3>
+              <p class="experience-item__company">某互联网巨头公司</p>
+            </div>
+            <span class="experience-item__period">2018年3月 - 2021年5月</span>
+          </div>
+          <p class="experience-item__location">📍 北京</p>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">核心职责</h4>
+            <ul class="experience-item__list">
+              <li>负责搜索与推荐算法团队的技术管理与产品研发，团队规模80人</li>
+              <li>主导新一代智能推荐系统的架构设计与核心算法研发</li>
+              <li>负责与产品、运营、数据等多部门的跨团队协作与资源整合</li>
+              <li>制定技术团队的人才招聘、培养与绩效考核体系</li>
+            </ul>
+          </div>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">主要成就</h4>
+            <ul class="experience-item__list">
+              <li>重构推荐系统核心算法，用户点击率提升42%，留存率提升28%</li>
+              <li>研发的多模态内容理解系统日均处理内容超过10亿条</li>
+              <li>建立A/B测试平台，支持每日超过1000个实验并行运行</li>
+              <li>团队获得公司"最佳技术团队"称号，个人获评"年度优秀管理者"</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 工作经历 3 -->
+        <div class="experience-item">
+          <div class="experience-item__header">
+            <div>
+              <h3 class="experience-item__title">高级算法工程师</h3>
+              <p class="experience-item__company">某知名人工智能公司</p>
+            </div>
+            <span class="experience-item__period">2015年7月 - 2018年2月</span>
+          </div>
+          <p class="experience-item__location">📍 深圳</p>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">核心职责</h4>
+            <ul class="experience-item__list">
+              <li>负责计算机视觉算法的研发与优化，主要应用于安防、自动驾驶场景</li>
+              <li>参与公司核心产品的技术架构设计与关键技术攻关</li>
+              <li>负责与客户的技术对接，提供定制化解决方案</li>
+              <li>指导初级工程师的技术成长与项目实践</li>
+            </ul>
+          </div>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">主要成就</h4>
+            <ul class="experience-item__list">
+              <li>研发的人脸识别算法在NIST评测中准确率达到99.8%，行业领先</li>
+              <li>主导的自动驾驶感知系统成功落地多个城市试点项目</li>
+              <li>申请发明专利8项，其中5项已获得授权</li>
+              <li>在CVPR、ICCV等顶级会议发表论文6篇</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 工作经历 4 -->
+        <div class="experience-item">
+          <div class="experience-item__header">
+            <div>
+              <h3 class="experience-item__title">算法工程师</h3>
+              <p class="experience-item__company">某科技公司</p>
+            </div>
+            <span class="experience-item__period">2012年8月 - 2015年6月</span>
+          </div>
+          <p class="experience-item__location">📍 杭州</p>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">核心职责</h4>
+            <ul class="experience-item__list">
+              <li>负责机器学习算法的研发与应用，主要应用于电商场景</li>
+              <li>参与用户行为分析、个性化推荐等核心功能开发</li>
+              <li>负责大数据处理平台的搭建与优化</li>
+              <li>协助团队完成技术文档编写与知识沉淀</li>
+            </ul>
+          </div>
+          
+          <div class="experience-item__section">
+            <h4 class="experience-item__section-title">主要成就</h4>
+            <ul class="experience-item__list">
+              <li>开发的销量预测模型将预测准确率从75%提升至92%</li>
+              <li>优化的分布式训练框架将模型训练时间缩短60%</li>
+              <li>参与开发的智能客服系统日均处理咨询超过100万条</li>
+              <li>获得公司"技术创新奖"及"优秀员工"称号</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

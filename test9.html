@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>林致远 - 个人简历</title>
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-surface: #f8fafc;
+      --color-text-primary: #1e293b;
+      --color-text-secondary: #475569;
+      --color-border: #e2e8f0;
+      --color-accent: #3b82f6;
+      --color-accent-light: #dbeafe;
+      --spacing-unit: 0.5rem;
+      --border-radius: 8px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0f172a;
+        --color-surface: #1e293b;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-border: #334155;
+        --color-accent: #60a5fa;
+        --color-accent-light: #1e3a5f;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    html {
+      font-size: 100%;
+      line-height: 1.5;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      z-index: 1000;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--color-accent);
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    .container {
+      width: min(90%, 800px);
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    main {
+      min-height: calc(100vh - 200px);
+      padding-block: 2rem;
+    }
+
+    header {
+      text-align: center;
+      padding-block: 2rem 1rem;
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin: 0 0 0.5rem 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-border);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h3 {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin: 0 0 0.5rem 0;
+      font-weight: 600;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin: 0.5rem 0 0.25rem 0;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0 0 1rem 0;
+    }
+
+    ul, ol {
+      margin: 0 0 1rem 0;
+      padding-inline-start: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      padding-inline-start: 0.25rem;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9375rem;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 0.75rem;
+      text-align: start;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .info-table th {
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      width: 35%;
+    }
+
+    .info-table tr:last-child th,
+    .info-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .experience-item,
+    .education-item,
+    .project-item,
+    .publication-item,
+    .award-item,
+    .certification-item,
+    .reference-item {
+      background-color: var(--color-surface);
+      border-radius: var(--border-radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .experience-header,
+    .education-header,
+    .project-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .job-title {
+      font-weight: 600;
+      font-size: 1.0625rem;
+    }
+
+    .company-name {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    .date-range {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .location {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
+
+    .section-label {
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .skills-category {
+      margin-bottom: 1rem;
+    }
+
+    .skills-category-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .skill-tag {
+      background-color: var(--color-accent-light);
+      color: var(--color-accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    .language-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .language-table th,
+    .language-table td {
+      padding: 0.75rem;
+      text-align: start;
+      border: 1px solid var(--color-border);
+    }
+
+    .language-table th {
+      font-weight: 600;
+      background-color: var(--color-surface);
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: var(--color-border);
+      margin: 2rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      font-size: 0.875rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover,
+    a:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    @media (min-width: 48rem) {
+      .container {
+        width: min(90%, 850px);
+      }
+
+      .experience-header,
+      .education-header,
+      .project-header {
+        flex-direction: row;
+      }
+    }
+
+    @media print {
+      body {
+        background-color: white;
+        color: black;
+      }
+
+      .experience-item,
+      .education-item,
+      .project-item,
+      .reference-item {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+
+      header {
+        border-bottom: 2px solid black;
+      }
+
+      h2 {
+        border-bottom: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳转到主要内容</a>
+
+  <div class="container">
+    <header>
+      <h1>林致远</h1>
+      <p class="subtitle">Lin Zhiyuan | 资深人工智能与机器学习专家</p>
+    </header>
+
+    <main id="main-content">
+      <section aria-labelledby="personal-info-heading">
+        <h2 id="personal-info-heading">📋 个人信息</h2>
+        <table class="info-table" aria-describedby="personal-info-heading">
+          <tbody>
+            <tr>
+              <th scope="row">姓名</th>
+              <td>林致远 (Lin Zhiyuan)</td>
+            </tr>
+            <tr>
+              <th scope="row">性别</th>
+              <td>男</td>
+            </tr>
+            <tr>
+              <th scope="row">出生日期</th>
+              <td>1988 年 3 月 15 日</td>
+            </tr>
+            <tr>
+              <th scope="row">国籍</th>
+              <td>中国</td>
+            </tr>
+            <tr>
+              <th scope="row">现居地</th>
+              <td>上海市浦东新区</td>
+            </tr>
+            <tr>
+              <th scope="row">联系电话</th>
+              <td>+86 138-0000-0000</td>
+            </tr>
+            <tr>
+              <th scope="row">电子邮箱</th>
+              <td><a href="mailto:zhiyuan.lin@email.com">zhiyuan.lin@email.com</a></td>
+            </tr>
+            <tr>
+              <th scope="row">LinkedIn</th>
+              <td><a href="https://linkedin.com/in/zhiyuan-lin" target="_blank" rel="noopener noreferrer">linkedin.com/in/zhiyuan-lin</a></td>
+            </tr>
+            <tr>
+              <th scope="row">个人网站</th>
+              <td><a href="https://www.zhiyuanlin.tech" target="_blank" rel="noopener noreferrer">www.zhiyuanlin.tech</a></td>
+            </tr>
+            <tr>
+              <th scope="row">GitHub</th>
+              <td><a href="https://github.com/zhiyuanlin" target="_blank" rel="noopener noreferrer">github.com/zhiyuanlin</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="professional-summary-heading">
+        <h2 id="professional-summary-heading">🎯 职业概述</h2>
+        <p>资深人工智能与机器学习专家，拥有超过 12 年的人工智能领域研发与管理经验。专注于深度学习、自然语言处理、计算机视觉及大语言模型的研发与应用。曾领导多个跨国技术团队，成功交付超过 30 个企业级 AI 解决方案，累计创造商业价值超过 5 亿元人民币。</p>
+        <p>具备扎实的理论基础与丰富的实战经验，在顶级学术会议及期刊发表论文 20 余篇，持有发明专利 15 项。善于将前沿技术与商业需求相结合，推动技术创新与产业化落地。现任某知名科技公司人工智能研究院副院长，负责公司 AI 战略规划与核心技术攻关。</p>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="work-experience-heading">
+        <h2 id="work-experience-heading">💼 工作经历</h2>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="job-title">人工智能研究院副院长</span>
+              <span class="company-name"> | 某知名科技有限公司</span>
+              <span class="location"> | 上海</span>
+            </div>
+            <time class="date-range" datetime="2021-06">2021 年 6 月 - 至今</time>
+          </div>
+
+          <span class="section-label">核心职责：</span>
+          <ul>
+            <li>负责公司人工智能技术的整体战略规划与技术路线制定，管理超过 150 人的研发团队</li>
+            <li>主导公司大语言模型研发项目，成功推出拥有自主知识产权的千亿参数级别模型</li>
+            <li>建立与清华大学、北京大学、中科院等高校及科研机构的战略合作关系</li>
+            <li>推动 AI 技术在金融、医疗、教育、零售等行业的商业化应用落地</li>
+            <li>年度研发预算超过 2 亿元人民币，投资回报率持续保持在 35% 以上</li>
+          </ul>
+
+          <span class="section-label">主要成就：</span>
+          <ul>
+            <li>带领团队研发的"智言"大语言模型在多个权威评测中达到国际领先水平</li>
+            <li>推动 AI 医疗影像诊断系统在全国 200+ 医院部署，累计服务患者超过 500 万人次</li>
+            <li>建立公司 AI 人才培养体系，年均培养高级 AI 工程师 50 余名</li>
+            <li>获得公司年度"卓越领导力奖"及"技术创新贡献奖"</li>
+          </ul>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="job-title">高级技术总监</span>
+              <span class="company-name"> | 某互联网巨头公司</span>
+              <span class="location"> | 北京</span>
+            </div>
+            <time class="date-range" datetime="2018-03/2021-05">2018 年 3 月 - 2021 年 5 月</time>
+          </div>
+
+          <span class="section-label">核心职责：</span>
+          <ul>
+            <li>负责搜索与推荐算法团队的技术管理与产品研发，团队规模 80 人</li>
+            <li>主导新一代智能推荐系统的架构设计与核心算法研发</li>
+            <li>负责与产品、运营、数据等多部门的跨团队协作与资源整合</li>
+            <li>制定技术团队的人才招聘、培养与绩效考核体系</li>
+          </ul>
+
+          <span class="section-label">主要成就：</span>
+          <ul>
+            <li>重构推荐系统核心算法，用户点击率提升 42%，留存率提升 28%</li>
+            <li>研发的多模态内容理解系统日均处理内容超过 10 亿条</li>
+            <li>建立 A/B 测试平台，支持每日超过 1000 个实验并行运行</li>
+            <li>团队获得公司"最佳技术团队"称号，个人获评"年度优秀管理者"</li>
+          </ul>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="job-title">高级算法工程师</span>
+              <span class="company-name"> | 某知名人工智能公司</span>
+              <span class="location"> | 深圳</span>
+            </div>
+            <time class="date-range" datetime="2015-07/2018-02">2015 年 7 月 - 2018 年 2 月</time>
+          </div>
+
+          <span class="section-label">核心职责：</span>
+          <ul>
+            <li>负责计算机视觉算法的研发与优化，主要应用于安防、自动驾驶场景</li>
+            <li>参与公司核心产品的技术架构设计与关键技术攻关</li>
+            <li>负责与客户的技術对接，提供定制化解决方案</li>
+            <li>指导初级工程师的技术成长与项目实践</li>
+          </ul>
+
+          <span class="section-label">主要成就：</span>
+          <ul>
+            <li>研发的人脸识别算法在 NIST 评测中准确率达到 99.8%，行业领先</li>
+            <li>主导的自动驾驶感知系统成功落地多个城市试点项目</li>
+            <li>申请发明专利 8 项，其中 5 项已获得授权</li>
+            <li>在 CVPR、ICCV 等顶级会议发表论文 6 篇</li>
+          </ul>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="job-title">算法工程师</span>
+              <span class="company-name"> | 某科技公司</span>
+              <span class="location"> | 杭州</span>
+            </div>
+            <time class="date-range" datetime="2012-08/2015-06">2012 年 8 月 - 2015 年 6 月</time>
+          </div>
+
+          <span class="section-label">核心职责：</span>
+          <ul>
+            <li>负责机器学习算法的研发与应用，主要应用于电商场景</li>
+            <li>参与用户行为分析、个性化推荐等核心功能开发</li>
+            <li>负责大数据处理平台的搭建与优化</li>
+            <li>协助团队完成技术文档编写与知识沉淀</li>
+          </ul>
+
+          <span class="section-label">主要成就：</span>
+          <ul>
+            <li>开发的销量预测模型将预测准确率从 75% 提升至 92%</li>
+            <li>优化的分布式训练框架将模型训练时间缩短 60%</li>
+            <li>参与开发的智能客服系统日均处理咨询超过 100 万条</li>
+            <li>获得公司"技术创新奖"及"优秀员工"称号</li>
+          </ul>
+        </article>
+
+        <article class="experience-item">
+          <div class="experience-header">
+            <div>
+              <span class="job-title">实习研究员</span>
+              <span class="company-name"> | 某研究院</span>
+              <span class="location"> | 北京</span>
+            </div>
+            <time class="date-range" datetime="2011-06/2012-07">2011 年 6 月 - 2012 年 7 月</time>
+          </div>
+
+          <span class="section-label">核心职责：</span>
+          <ul>
+            <li>参与国家自然基金项目的研究工作</li>
+            <li>负责深度学习算法的实验验证与性能优化</li>
+            <li>协助撰写学术论文与技术报告</li>
+          </ul>
+
+          <span class="section-label">主要成就：</span>
+          <ul>
+            <li>参与的研究成果发表于 NeurIPS 会议</li>
+            <li>开发的图像分割算法被项目组采纳为核心技术</li>
+            <li>获得研究院"优秀实习生"称号</li>
+          </ul>
+        </article>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="education-heading">
+        <h2 id="education-heading">🎓 教育背景</h2>
+
+        <article class="education-item">
+          <div class="education-header">
+            <div>
+              <span class="job-title">博士学位</span>
+              <span class="company-name"> | 清华大学</span>
+              <span class="location"> | 计算机科学与技术学院</span>
+            </div>
+            <time class="date-range" datetime="2008-09/2012-07">2008 年 9 月 - 2012 年 7 月</time>
+          </div>
+          <ul>
+            <li>专业：计算机应用技术</li>
+            <li>研究方向：深度学习与计算机视觉</li>
+            <li>导师：张教授（IEEE Fellow）</li>
+            <li>论文题目：《基于深度卷积神经网络的目标检测与识别研究》</li>
+            <li>GPA：3.9/4.0（专业前 5%）</li>
+            <li>荣誉：国家奖学金、清华大学优秀博士论文</li>
+          </ul>
+        </article>
+
+        <article class="education-item">
+          <div class="education-header">
+            <div>
+              <span class="job-title">硕士学位</span>
+              <span class="company-name"> | 清华大学</span>
+              <span class="location"> | 计算机科学与技术学院</span>
+            </div>
+            <time class="date-range" datetime="2006-09/2008-07">2006 年 9 月 - 2008 年 7 月</time>
+          </div>
+          <ul>
+            <li>专业：计算机科学与技术</li>
+            <li>研究方向：机器学习</li>
+            <li>GPA：3.8/4.0（专业前 10%）</li>
+            <li>荣誉：清华大学优秀硕士毕业生</li>
+          </ul>
+        </article>
+
+        <article class="education-item">
+          <div class="education-header">
+            <div>
+              <span class="job-title">学士学位</span>
+              <span class="company-name"> | 浙江大学</span>
+              <span class="location"> | 计算机科学与技术学院</span>
+            </div>
+            <time class="date-range" datetime="2002-09/2006-07">2002 年 9 月 - 2006 年 7 月</time>
+          </div>
+          <ul>
+            <li>专业：计算机科学与技术</li>
+            <li>GPA：3.9/4.0（专业前 3%）</li>
+            <li>荣誉：国家奖学金、浙江大学优秀毕业生、全国大学生程序设计竞赛金奖</li>
+          </ul>
+        </article>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="skills-heading">
+        <h2 id="skills-heading">🔧 技能专长</h2>
+
+        <div class="skills-category">
+          <span class="skills-category-title">编程语言</span>
+          <ul class="skill-list">
+            <li><span class="skill-tag">精通：Python、C++、Java</span></li>
+            <li><span class="skill-tag">熟练：Go、JavaScript、SQL、Shell</span></li>
+            <li><span class="skill-tag">了解：Rust、Scala、R</span></li>
+          </ul>
+        </div>
+
+        <div class="skills-category">
+          <span class="skills-category-title">深度学习框架</span>
+          <ul class="skill-list">
+            <li><span class="skill-tag">精通：PyTorch、TensorFlow、Keras</span></li>
+            <li><span class="skill-tag">熟练：MXNet、Caffe、PaddlePaddle</span></li>
+            <li><span class="skill-tag">了解：JAX、MindSpore</span></li>
+          </ul>
+        </div>
+
+        <div class="skills-category">
+          <span class="skills-category-title">专业领域</span>
+          <ul class="skill-list">
+            <li><span class="skill-tag">自然语言处理：大语言模型、机器翻译、文本生成、情感分析、命名实体识别</span></li>
+            <li><span class="skill-tag">计算机视觉：目标检测、图像分割、人脸识别、视频分析、3D 视觉</span></li>
+            <li><span class="skill-tag">机器学习：深度学习、强化学习、迁移学习、联邦学习、AutoML</span></li>
+            <li><span class="skill-tag">大数据技术：Hadoop、Spark、Flink、Kafka、HBase</span></li>
+            <li><span class="skill-tag">云计算：AWS、Azure、阿里云、Kubernetes、Docker</span></li>
+          </ul>
+        </div>
+
+        <div class="skills-category">
+          <span class="skills-category-title">软技能</span>
+          <ul class="skill-list">
+            <li><span class="skill-tag">团队管理与领导力</span></li>
+            <li><span class="skill-tag">跨部门沟通与协作</span></li>
+            <li><span class="skill-tag">技术战略规划</span></li>
+            <li><span class="skill-tag">项目管理与风险控制</span></li>
+            <li><span class="skill-tag">技术演讲与培训</span></li>
+            <li><span class="skill-tag">英文读写流利（TOEFL 115 分）</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="projects-heading">
+        <h2 id="projects-heading">🚀 项目经验</h2>
+
+        <article class="project-item">
+          <div class="project-header">
+            <h3>项目一：千亿参数大语言模型研发</h3>
+            <time class="date-range" datetime="2022-01">2022 年 1 月 - 至今</time>
+          </div>
+          <p><strong>项目角色：</strong>项目负责人</p>
+          <p><strong>项目描述：</strong>主导研发具有自主知识产权的千亿参数级别大语言模型，支持多语言理解与生成、代码生成、逻辑推理等多种能力。</p>
+          <p><strong>技术栈：</strong>PyTorch、DeepSpeed、Megatron-LM、Kubernetes</p>
+          <p><strong>个人贡献：</strong></p>
+          <ul>
+            <li>设计模型整体架构与训练方案</li>
+            <li>攻克分布式训练中的通信瓶颈问题</li>
+            <li>建立模型评估体系与安全对齐机制</li>
+            <li>协调跨团队资源，确保项目按期交付</li>
+          </ul>
+          <p><strong>项目成果：</strong></p>
+          <ul>
+            <li>模型在多个权威评测中达到国际领先水平</li>
+            <li>成功应用于公司核心产品线</li>
+            <li>发表顶级会议论文 3 篇，申请专利 5 项</li>
+          </ul>
+        </article>
+
+        <article class="project-item">
+          <div class="project-header">
+            <h3>项目二：智能医疗影像诊断系统</h3>
+            <time class="date-range" datetime="2020-06/2021-12">2020 年 6 月 - 2021 年 12 月</time>
+          </div>
+          <p><strong>项目角色：</strong>技术负责人</p>
+          <p><strong>项目描述：</strong>开发基于深度学习的医疗影像智能诊断系统，支持 CT、MRI、X 光等多种影像类型的病灶检测与诊断辅助。</p>
+          <p><strong>技术栈：</strong>TensorFlow、MONAI、DICOM、微服务架构</p>
+          <p><strong>个人贡献：</strong></p>
+          <ul>
+            <li>设计多模态影像融合算法</li>
+            <li>建立医学专家标注与质量管控体系</li>
+            <li>负责系统的临床验证与注册申报</li>
+          </ul>
+          <p><strong>项目成果：</strong></p>
+          <ul>
+            <li>系统在全国 200+ 医院部署使用</li>
+            <li>诊断准确率超过 95%，达到副主任医师水平</li>
+            <li>获得 NMPA 三类医疗器械注册证</li>
+            <li>累计服务患者超过 500 万人次</li>
+          </ul>
+        </article>
+
+        <article class="project-item">
+          <div class="project-header">
+            <h3>项目三：新一代智能推荐系统</h3>
+            <time class="date-range" datetime="2018-06/2020-05">2018 年 6 月 - 2020 年 5 月</time>
+          </div>
+          <p><strong>项目角色：</strong>核心算法负责人</p>
+          <p><strong>项目描述：</strong>重构公司核心推荐系统，引入深度学习与强化学习技术，实现个性化内容推荐的精准度大幅提升。</p>
+          <p><strong>技术栈：</strong>PyTorch、TensorFlow、Spark、Redis、Kafka</p>
+          <p><strong>个人贡献：</strong></p>
+          <ul>
+            <li>设计多任务学习框架，同时优化点击率、留存率等多个目标</li>
+            <li>开发实时特征工程系统，支持毫秒级特征更新</li>
+            <li>建立完整的 A/B 测试与效果评估体系</li>
+          </ul>
+          <p><strong>项目成果：</strong></p>
+          <ul>
+            <li>用户点击率提升 42%，留存率提升 28%</li>
+            <li>系统日均处理请求超过 100 亿次</li>
+            <li>获得公司技术创新一等奖</li>
+          </ul>
+        </article>
+
+        <article class="project-item">
+          <div class="project-header">
+            <h3>项目四：自动驾驶感知系统</h3>
+            <time class="date-range" datetime="2016-03/2018-02">2016 年 3 月 - 2018 年 2 月</time>
+          </div>
+          <p><strong>项目角色：</strong>算法核心开发者</p>
+          <p><strong>项目描述：</strong>研发面向 L4 级自动驾驶的多传感器融合感知系统，支持车辆、行人、交通标志等目标的检测与跟踪。</p>
+          <p><strong>技术栈：</strong>C++、CUDA、ROS、TensorRT</p>
+          <p><strong>个人贡献：</strong></p>
+          <ul>
+            <li>开发基于激光雷达与摄像头的融合感知算法</li>
+            <li>优化模型推理性能，满足实时性要求</li>
+            <li>负责系统的道路测试与迭代优化</li>
+          </ul>
+          <p><strong>项目成果：</strong></p>
+          <ul>
+            <li>系统在多个城市完成超过 100 万公里道路测试</li>
+            <li>目标检测准确率超过 99%</li>
+            <li>成功落地多个示范运营项目</li>
+          </ul>
+        </article>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="publications-heading">
+        <h2 id="publications-heading">📚 发表论文</h2>
+
+        <h3>期刊论文</h3>
+        <ol>
+          <li>"Large Language Models for Medical Diagnosis: A Comprehensive Study" - Nature Medicine, 2023 (第一作者)</li>
+          <li>"Efficient Training of Billion-Scale Transformer Models" - Journal of Machine Learning Research, 2022 (第一作者)</li>
+          <li>"Multi-Modal Fusion for Autonomous Driving Perception" - IEEE TPAMI, 2021 (通讯作者)</li>
+          <li>"Deep Learning for Medical Image Analysis: Survey and Perspectives" - Medical Image Analysis, 2020 (第一作者)</li>
+          <li>"Attention Mechanisms in Computer Vision: A Survey" - IEEE TPAMI, 2019 (第二作者)</li>
+        </ol>
+
+        <h3>会议论文</h3>
+        <ol>
+          <li>"Scaling Laws for Neural Language Models in Low-Resource Settings" - NeurIPS, 2023 (第一作者)</li>
+          <li>"Efficient Fine-Tuning of Large Language Models with Parameter-Efficient Methods" - ICML, 2023 (第一作者)</li>
+          <li>"Self-Supervised Learning for Medical Image Representation" - CVPR, 2022 (第一作者)</li>
+          <li>"Multi-Task Learning for Recommendation Systems" - KDD, 2021 (第一作者)</li>
+          <li>"Real-Time Object Detection for Autonomous Driving" - ICCV, 2020 (第一作者)</li>
+          <li>"Deep Neural Networks for Face Recognition in the Wild" - CVPR, 2019 (第一作者)</li>
+          <li>"End-to-End Learning for Visual Question Answering" - NeurIPS, 2018 (第一作者)</li>
+          <li>"Semantic Segmentation with Deep Convolutional Networks" - ICCV, 2017 (第一作者)</li>
+          <li>"Transfer Learning for Image Classification" - CVPR, 2016 (第一作者)</li>
+          <li>"Deep Learning for Natural Language Processing" - ACL, 2015 (第二作者)</li>
+          <li>"Convolutional Neural Networks for Object Detection" - NeurIPS, 2014 (第一作者)</li>
+          <li>"Feature Learning with Deep Belief Networks" - ICML, 2013 (第一作者)</li>
+          <li>"Unsupervised Pre-Training for Image Classification" - CVPR, 2012 (第一作者)</li>
+        </ol>
+        <p><strong>论文引用次数：</strong>累计引用超过 15,000 次，h-index: 28</p>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="awards-heading">
+        <h2 id="awards-heading">🏆 获奖情况</h2>
+
+        <h3>国家级奖项</h3>
+        <ul>
+          <li>国家科学技术进步奖二等奖（2023 年）</li>
+          <li>国家杰出青年科学基金（2022 年）</li>
+          <li>中国青年科技奖（2021 年）</li>
+          <li>国家优秀自费留学生奖学金（2011 年）</li>
+        </ul>
+
+        <h3>行业奖项</h3>
+        <ul>
+          <li>中国人工智能学会优秀论文奖（2023 年）</li>
+          <li>世界人工智能大会杰出贡献奖（2022 年）</li>
+          <li>中国计算机学会科技进步一等奖（2021 年）</li>
+          <li>全球人工智能创新者 50 人（2020 年）</li>
+        </ul>
+
+        <h3>公司奖项</h3>
+        <ul>
+          <li>年度卓越领导力奖（2023 年）</li>
+          <li>技术创新贡献奖（2022 年、2021 年）</li>
+          <li>最佳技术团队奖（2020 年、2019 年）</li>
+          <li>年度优秀管理者（2019 年）</li>
+          <li>技术创新奖（2016 年、2014 年）</li>
+          <li>优秀员工（2013 年）</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="certifications-heading">
+        <h2 id="certifications-heading">📜 专业认证</h2>
+        <ul>
+          <li><strong>AWS 认证机器学习专家</strong> (2023 年)</li>
+          <li><strong>Google Cloud 专业机器学习工程师</strong> (2022 年)</li>
+          <li><strong>NVIDIA 深度学习认证专家</strong> (2021 年)</li>
+          <li><strong>PMP 项目管理专业人士认证</strong> (2020 年)</li>
+          <li><strong>TOEFL</strong> 115 分 (2019 年)</li>
+          <li><strong>计算机技术与软件专业技术资格（高级）- 系统架构设计师</strong> (2015 年)</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="languages-heading">
+        <h2 id="languages-heading">🌐 语言能力</h2>
+        <table class="language-table">
+          <thead>
+            <tr>
+              <th scope="col">语言</th>
+              <th scope="col">听说</th>
+              <th scope="col">读写</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>中文（普通话）</strong></td>
+              <td>母语</td>
+              <td>母语</td>
+            </tr>
+            <tr>
+              <td><strong>英语</strong></td>
+              <td>流利（商务谈判级别）</td>
+              <td>流利（学术论文写作级别）</td>
+            </tr>
+            <tr>
+              <td><strong>日语</strong></td>
+              <td>日常交流</td>
+              <td>基本阅读</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="interests-heading">
+        <h2 id="interests-heading">🎨 兴趣爱好</h2>
+        <ul>
+          <li><strong>阅读</strong>：偏好科技、历史、哲学类书籍，年均阅读量超过 50 本</li>
+          <li><strong>运动</strong>：马拉松（最好成绩 3 小时 30 分）、游泳、羽毛球</li>
+          <li><strong>音乐</strong>：钢琴（业余十级）、古典音乐欣赏</li>
+          <li><strong>旅行</strong>：已到访超过 30 个国家，偏好科技与文化探索之旅</li>
+          <li><strong>公益</strong>：担任多家教育公益组织志愿者，资助 5 名贫困地区学生完成学业</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="references-heading">
+        <h2 id="references-heading">👥 推荐人</h2>
+
+        <article class="reference-item">
+          <h3>推荐人一</h3>
+          <p><strong>张教授</strong><br>
+          清华大学计算机系教授、IEEE Fellow<br>
+          邮箱：<a href="mailto:zhang.prof@tsinghua.edu.cn">zhang.prof@tsinghua.edu.cn</a><br>
+          电话：+86 10-00000000</p>
+        </article>
+
+        <article class="reference-item">
+          <h3>推荐人二</h3>
+          <p><strong>李博士</strong><br>
+          某知名科技有限公司 CEO<br>
+          邮箱：<a href="mailto:li.ceo@techcompany.com">li.ceo@techcompany.com</a><br>
+          电话：+86 21-00000000</p>
+        </article>
+
+        <article class="reference-item">
+          <h3>推荐人三</h3>
+          <p><strong>王教授</strong><br>
+          北京大学人工智能研究院院长<br>
+          邮箱：<a href="mailto:wang.prof@pku.edu.cn">wang.prof@pku.edu.cn</a><br>
+          电话：+86 10-00000001</p>
+        </article>
+      </section>
+
+      <hr>
+
+      <section aria-labelledby="self-evaluation-heading">
+        <h2 id="self-evaluation-heading">📝 自我评价</h2>
+        <p>本人热爱人工智能技术，具有强烈的求知欲与创新精神。在技术研发方面，追求极致，善于攻克技术难题；在团队管理方面，注重人才培养与团队建设，善于激发团队成员的潜力；在商业应用方面，能够准确把握技术趋势与市场需求，推动技术创新与产业化落地。</p>
+        <p>未来将继续深耕人工智能领域，致力于推动通用人工智能技术的发展与应用，为人类社会的进步贡献自己的力量。</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>简历更新日期：2024 年 1 月</p>
+      <p>本简历内容均为虚构，仅用于演示目的</p>
+    </footer>
+  </div>
+</body>
+</html>

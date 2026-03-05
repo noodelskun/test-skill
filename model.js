@@ -18,7 +18,7 @@ export const qwen3Max = new ChatOpenAI({
   temperature: 0.5,
 });
 export const qwenPlus = new ChatOpenAI({
-  model: 'qwen3.5-plus',
+  model: 'qwen3.5-flash',
   configuration: {
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1', // 注意: @langchain/openai有些版本使用 configuration.baseURL
   },

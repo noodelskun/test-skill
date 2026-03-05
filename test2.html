@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林致远 - 个人简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.5em;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 30px 0 20px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item strong {
+            color: #2c3e50;
+            min-width: 80px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .job-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .job-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .job-company {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .job-period {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .summary {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>林致远 个人简历</h1>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>姓名:</strong>
+                    <span>林致远 (Lin Zhiyuan)</span>
+                </div>
+                <div class="contact-item">
+                    <strong>性别:</strong>
+                    <span>男</span>
+                </div>
+                <div class="contact-item">
+                    <strong>出生日期:</strong>
+                    <time datetime="1988-03-15">1988 年 3 月 15 日</time>
+                </div>
+                <div class="contact-item">
+                    <strong>国籍:</strong>
+                    <span>中国</span>
+                </div>
+                <div class="contact-item">
+                    <strong>现居地:</strong>
+                    <span>上海市浦东新区</span>
+                </div>
+                <div class="contact-item">
+                    <strong>联系电话:</strong>
+                    <a href="tel:+8613800000000">+86 138-0000-0000</a>
+                </div>
+                <div class="contact-item">
+                    <strong>电子邮箱:</strong>
+                    <a href="mailto:zhiyuan.lin@email.com">zhiyuan.lin@email.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>LinkedIn:</strong>
+                    <a href="https://linkedin.com/in/zhiyuan-lin" target="_blank" rel="noopener">linkedin.com/in/zhiyuan-lin</a>
+                </div>
+                <div class="contact-item">
+                    <strong>个人网站:</strong>
+                    <a href="https://www.zhiyuanlin.tech" target="_blank" rel="noopener">www.zhiyuanlin.tech</a>
+                </div>
+                <div class="contact-item">
+                    <strong>GitHub:</strong>
+                    <a href="https://github.com/zhiyuanlin" target="_blank" rel="noopener">github.com/zhiyuanlin</a>
+                </div>
+            </div>
+        </header>
+
+        <article>
+            <section>
+                <h2>🎯 职业概述</h2>
+                <div class="summary">
+                    <p>资深人工智能与机器学习专家，拥有超过 12 年的人工智能领域研发与管理经验。专注于深度学习、自然语言处理、计算机视觉及大语言模型的研发与应用。曾领导多个跨国技术团队，成功交付超过 30 个企业级 AI 解决方案，累计创造商业价值超过 5 亿元人民币。</p>
+                    <br>
+                    <p>具备扎实的理论基础与丰富的实战经验，在顶级学术会议及期刊发表论文 20 余篇，持有发明专利 15 项。善于将前沿技术与商业需求相结合，推动技术创新与产业化落地。现任某知名科技公司人工智能研究院副院长，负责公司 AI 战略规划与核心技术攻关。</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>💼 工作经历</h2>
+
+                <article class="job-section">
+                    <h3 class="job-title">人工智能研究院副院长</h3>
+                    <p class="job-company">某知名科技有限公司 | 上海</p>
+                    <span class="job-period">2021 年 6 月 - 至今</span>
+                    
+                    <h4>核心职责：</h4>
+                    <ul>
+                        <li>负责公司人工智能技术的整体战略规划与技术路线制定，管理超过 150 人的研发团队</li>
+                        <li>主导公司大语言模型研发项目，成功推出拥有自主知识产权的千亿参数级别模型</li>
+                        <li>建立和清华大学、北京大学、中科院等高校及科研机构的战略合作关系</li>
+                        <li>推动 AI 技术在金融、医疗、教育、零售等行业的商业化应用落地</li>
+                        <li>年度研发预算超过 2 亿元人民币，投资回报率持续保持在 35% 以上</li>
+                    </ul>
+
+                    <h4>主要成就：</h4>
+                    <ul>
+                        <li>带领团队研发的"智言"大语言模型在多个权威评测中达到国际领先水平</li>
+                        <li>推动 AI 医疗影像诊断系统在全国 200+ 医院部署，累计服务患者超过 500 万人次</li>
+                        <li>建立公司 AI 人才培养体系，年均培养高级 AI 工程师 50 余名</li>
+                        <li>获得公司年度"卓越领导力奖"及"技术创新贡献奖"</li>
+                    </ul>
+                </article>
+
+                <article class="job-section">
+                    <h3 class="job-title">高级技术总监</h3>
+                    <p class="job-company">某互联网巨头公司 | 北京</p>
+                    <span class="job-period">2018 年 3 月 - 2021 年 5 月</span>
+                    
+                    <h4>核心职责：</h4>
+                    <ul>
+                        <li>负责搜索与推荐算法团队的技术管理与产品研发，团队规模 80 人</li>
+                        <li>主导新一代智能推荐系统的架构设计与核心算法研发</li>
+                        <li>负责与产品、运营、数据等多部门的跨团队协作与资源整合</li>
+                        <li>制定技术团队的人才招聘、培养与绩效考核体系</li>
+                    </ul>
+
+                    <h4>主要成就：</h4>
+                    <ul>
+                        <li>重构推荐系统核心算法，用户点击率提升 42%，留存率提升 28%</li>
+                        <li>研发的多模态内容理解系统日均处理内容超过 10 亿条</li>
+                        <li>建立 A/B 测试平台，支持每日超过 1000 个实验并行运行</li>
+                        <li>团队获得公司"最佳技术团队"称号，个人获评"年度优秀管理者"</li>
+                    </ul>
+                </article>
+
+                <article class="job-section">
+                    <h3 class="job-title">高级算法工程师</h3>
+                    <p class="job-company">某知名人工智能公司 | 深圳</p>
+                    <span class="job-period">2015 年 7 月 - 2018 年 2 月</span>
+                    
+                    <h4>核心职责：</h4>
+                    <ul>
+                        <li>负责计算机视觉算法的研发与优化，主要应用于安防、自动驾驶场景</li>
+                        <li>参与公司核心产品的技术架构设计与关键技术攻关</li>
+                        <li>负责与客户的技术对接，提供定制化解决方案</li>
+                        <li>指导初级工程师的技术成长与项目实践</li>
+                    </ul>
+
+                    <h4>主要成就：</h4>
+                    <ul>
+                        <li>研发的人脸识别算法在 NIST 评测中准确率达到 99.8%，行业领先</li>
+                        <li>主导的自动驾驶感知系统成功落地多个城市试点项目</li>
+                        <li>申请发明专利 8 项，其中 5 项已获得授权</li>
+                        <li>在 CVPR、ICCV 等顶级会议发表论文 6 篇</li>
+                    </ul>
+                </article>
+
+                <article class="job-section">
+                    <h3 class="job-title">算法工程师</h3>
+                    <p class="job-company">某科技公司 | 杭州</p>
+                    <span class="job-period">2012 年 8 月 - 2015 年 6 月</span>
+                    
+                    <h4>核心职责：</h4>
+                    <ul>
+                        <li>负责机器学习算法的研发与应用，主要应用于电商场景</li>
+                        <li>参与用户行为分析、个性化推荐等核心功能开发</li>
+                        <li>负责大数据处理平台的搭建与优化</li>
+                        <li>协助团队完成技术文档编写与知识沉淀</li>
+                    </ul>
+
+                    <h4>主要成就：</h4>
+                    <ul>
+                        <li>开发的销量预测模型将预测准确率从 75% 提升至 92%</li>
+                        <li>优化的分布式训练框架将模型训练时间缩短 60%</li>
+                        <li>参与开发的智能客服系统日均处理咨询超过 100 万条</li>
+                        <li>获得公司"技术创新奖"及"优秀员工"称号</li>
+                    </ul>
+                </article>
+            </section>
+        </article>
+
+        <footer>
+            <p>最后更新：<time datetime="2024">2024 年</time></p>
+        </footer>
+    </main>
+</body>
+</html>

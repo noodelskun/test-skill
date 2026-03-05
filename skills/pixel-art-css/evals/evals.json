@@ -1,0 +1,47 @@
+{
+  "skill_name": "pixel-art-css",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Build me a retro RPG-style dialog box with a character portrait, typewriter text effect, and CRT scanlines. It should look like it belongs in a SNES-era JRPG. Single HTML file.",
+      "expected_output": "A single HTML file with an RPG dialog box featuring pixel borders, a box-shadow character portrait, typewriter animation using steps(), CRT scanline overlay, and a retro color palette. Should use Press Start 2P or similar pixel font.",
+      "files": [],
+      "assertions": [
+        {"name": "uses-pixel-font", "type": "code_check", "check": "contains_pattern", "pattern": "Press Start 2P|Silkscreen|VT323|Pixelify|DotGothic|pixel.*font|bitmap.*font"},
+        {"name": "has-typewriter-effect", "type": "code_check", "check": "contains_pattern", "pattern": "steps\\(|typewriter|typing"},
+        {"name": "has-scanlines", "type": "code_check", "check": "contains_pattern", "pattern": "repeating-linear-gradient|scanline"},
+        {"name": "has-pixel-borders", "type": "code_check", "check": "not_contains_pattern", "pattern": "border-radius:\\s*[1-9]", "note": "Should not have rounded corners on UI elements (CRT frame excepted)"},
+        {"name": "has-limited-palette", "type": "code_check", "check": "contains_pattern", "pattern": "--[a-z].*:\\s*#"},
+        {"name": "single-html-file", "type": "file_check", "check": "file_count", "expected": 1}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Create a landing page for a fictional indie game called 'Dungeon Byte' in full pixel art style. Include a hero section with a pixelated logo, animated stars background, a feature list with pixel icons, and a CRT monitor frame around the whole thing. Single HTML file.",
+      "expected_output": "A complete landing page in a single HTML file with consistent pixel art aesthetic throughout. Should include animated elements using steps(), box-shadow pixel icons, CRT frame with scanlines and edge darkening, responsive pixel scaling using --px variable, and a cohesive retro color palette.",
+      "files": [],
+      "assertions": [
+        {"name": "uses-pixel-font", "type": "code_check", "check": "contains_pattern", "pattern": "Press Start 2P|Silkscreen|VT323|Pixelify|DotGothic|pixel.*font"},
+        {"name": "has-crt-frame", "type": "code_check", "check": "contains_pattern", "pattern": "scanline|crt|repeating-linear-gradient.*rgba.*0.*0.*0"},
+        {"name": "has-animated-stars", "type": "code_check", "check": "contains_pattern", "pattern": "star|twinkle|@keyframes.*star|particle"},
+        {"name": "has-pixel-icons", "type": "code_check", "check": "contains_pattern", "pattern": "box-shadow.*px.*px|pixel.*icon|⚔|🗡|feature"},
+        {"name": "has-px-variable", "type": "code_check", "check": "contains_pattern", "pattern": "--px|--pixel"},
+        {"name": "single-html-file", "type": "file_check", "check": "file_count", "expected": 1}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Make a pure CSS pixel art character (like a small knight or warrior) using box-shadow, with an idle animation that cycles through 2-3 frames using steps(). Put it on a dark background with a subtle CRT effect. Single HTML file.",
+      "expected_output": "A single HTML file with a recognizable pixel art character built entirely from box-shadow. Should have at least 2 animation frames using steps() timing, image-rendering: pixelated if applicable, and a subtle CRT scanline/glow overlay on the background.",
+      "files": [],
+      "assertions": [
+        {"name": "uses-box-shadow-art", "type": "code_check", "check": "contains_pattern", "pattern": "box-shadow:([\\s\\S]*?px\\s+\\d+px\\s+){5,}"},
+        {"name": "has-multi-frame-animation", "type": "code_check", "check": "contains_pattern", "pattern": "@keyframes.*idle|frame-[12]|animation.*steps"},
+        {"name": "uses-steps-timing", "type": "code_check", "check": "contains_pattern", "pattern": "steps\\("},
+        {"name": "has-crt-effect", "type": "code_check", "check": "contains_pattern", "pattern": "scanline|crt|repeating-linear-gradient|text-shadow.*0\\s+0"},
+        {"name": "image-rendering-set", "type": "code_check", "check": "contains_pattern", "pattern": "image-rendering:\\s*(pixelated|crisp-edges)"},
+        {"name": "single-html-file", "type": "file_check", "check": "file_count", "expected": 1}
+      ]
+    }
+  ]
+}
