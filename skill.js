@@ -1,4 +1,4 @@
-import { qwenPlus, qwenCoderPlus, qwenCoderFlash } from './model.js';
+import { qwenPlus, qwenCoderPlus, qwenCoderFlash,OllamaCoder,qwen3Max } from './model.js';
 import { createDeepAgent, FilesystemBackend } from 'deepagents';
 import { HumanMessage, AIMessage, ToolMessage, SystemMessage } from '@langchain/core/messages';
 import { createMiddleware } from 'langchain';
@@ -48,7 +48,7 @@ const contextSchema = z.object({
 // });
 
 const agent = createDeepAgent({
-    model: qwenPlus,
+    model: qwen3Max,
     systemPrompt: `
     你是一个文本生成助手
     你可以使用的skill如下:
@@ -75,6 +75,8 @@ const agent = createDeepAgent({
     // contextSchema,
 });
 
+const agentRunner = agent.withConfig({ recursionLimit: 100 });
+
 const render = async () => {
     const time = new Date().getTime();
     const usageTotals = { prompt: 0, completion: 0, total: 0 };
@@ -90,34 +92,45 @@ const render = async () => {
         }
     }];
     const resume = await readFileUtf8('虚拟人物简历.md');
-    const result = await agent.stream({
-        messages: [
-            createHtmlMessage({
-                text: resume,
-                fileName: 'test14.html',
-                skill: 'html-render',
-            }),
-        ]
-    }, {
-        streamMode: 'values', callbacks
-    });
-    for await (const chunk of result) {
-        for (const message of chunk.messages) {
-            console.log('--------------ALL START---------------')
-            console.log(message.content);
-            console.log('--------------ALL END---------------')
-        }
-        const lastMessage = chunk.messages[chunk.messages.length - 1];
-        if (lastMessage instanceof AIMessage) {
-            console.log('---------AI Message----------');
-            console.log(lastMessage);
-        }
-        if (lastMessage instanceof ToolMessage) {
-            console.log('---------Tool Message----------');
-            console.log(lastMessage);
-        }
-        if (lastMessage?.content) {
-            console.log(`代理: ${lastMessage.content}`);
+    let attempt = 0;
+    while (attempt < 2) {
+        try {
+            const result = await agentRunner.stream({
+                messages: [
+                    createHtmlMessage({
+                        text: resume,
+                        fileName: 'test16.html',
+                        skill: 'html-render',
+                    }),
+                ]
+            }, {
+                streamMode: 'values',
+                callbacks,
+                recursionLimit: 50
+            });
+            for await (const chunk of result) {
+                for (const message of chunk.messages) {
+                    console.log('--------------ALL START---------------')
+                    console.log(message.content);
+                    console.log('--------------ALL END---------------')
+                }
+                const lastMessage = chunk.messages[chunk.messages.length - 1];
+                if (lastMessage instanceof AIMessage) {
+                    console.log('---------AI Message----------');
+                    console.log(lastMessage);
+                }
+                if (lastMessage instanceof ToolMessage) {
+                    console.log('---------Tool Message----------');
+                    console.log(lastMessage);
+                }
+                if (lastMessage?.content) {
+                    console.log(`代理: ${lastMessage.content}`);
+                }
+            }
+            break;
+        } catch (e) {
+            attempt += 1;
+            if (attempt >= 2) throw e;
         }
     }
     const time2 = new Date().getTime();

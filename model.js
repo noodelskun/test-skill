@@ -1,5 +1,5 @@
 import { ChatOpenAI } from '@langchain/openai';
-
+import { ChatOllama } from "@langchain/ollama";
 // 建议使用环境变量管理 API Key，避免硬编码
 // 如果没有配置环境变量，请将 'YOUR_DASHSCOPE_API_KEY' 替换为你的实际 Key
 const apiKey = 'sk-d23a1764eabb4f66ba734c504c8acb15';
@@ -8,6 +8,12 @@ if (!apiKey) {
     '❌ Error: API Key is missing. Please set DASHSCOPE_API_KEY in environment variables or in model/qwen.js',
   );
 }
+
+export const OllamaCoder = new ChatOllama({
+    baseUrl: "http://localhost:11434",
+    model: "qwen3.5:9b", // 本地模型名称
+    temperature: 0.2,
+});
 
 export const qwen3Max = new ChatOpenAI({
   model: 'qwen3-max-2026-01-23', // 确认使用的是 qwen3-max 模型

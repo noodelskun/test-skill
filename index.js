@@ -1,4 +1,4 @@
-import { qwen3Max, qwenPlus, qwenCoderPlus, qwenCoderFlash } from './model.js';
+import { qwen3Max, qwenPlus, qwenCoderPlus, qwenCoderFlash, OllamaCoder } from './model.js';
 import { createDeepAgent } from 'deepagents';
 import { HumanMessage, AIMessage, ToolMessage } from '@langchain/core/messages';
 
@@ -7,7 +7,7 @@ const AIResponseSchema = z.object({
     content: z.string().describe('AI 回复的内容'),
 });
 const agent = createDeepAgent({
-    model: qwen3Max,
+    model: OllamaCoder,
     systemPrompt: '',
     responseFormat: AIResponseSchema,
 });
