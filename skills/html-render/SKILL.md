@@ -47,7 +47,7 @@ metadata:
 
 ### 6. 配色方案
 - 请严格遵守 [/skills/html-render/theme/var.css](/skills/html-render/theme/var.css) 中定义的配色方案,使用其颜色变量。
-- 不允许直接在HTML中使用硬编码的颜色值。
+- 不允许直接在HTML中使用硬编码的颜色值，只能用var()引用颜色变量。
 - 所有颜色均必须从 [/skills/html-render/theme/var.css](/skills/html-render/theme/var.css) 中引用。
 
 ### 7. 排版与图标

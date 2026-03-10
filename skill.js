@@ -1,6 +1,8 @@
 import { qwenPlus, qwenCoderPlus, qwenCoderFlash } from './model.js';
-import { createDeepAgent, FilesystemBackend } from 'deepagents';
+import { createDeepAgent, FilesystemBackend, CompositeBackend, StateBackend, StoreBackend } from 'deepagents';
 import { HumanMessage, AIMessage, ToolMessage, SystemMessage } from '@langchain/core/messages';
+import { MemorySaver } from '@langchain/langgraph';
+import { InMemoryStore } from '@langchain/langgraph-checkpoint';
 import { createMiddleware } from 'langchain';
 import z from 'zod';
 import path from 'path';
@@ -12,7 +14,6 @@ export async function readFileUtf8(filePath) {
     const target = path.isAbsolute(filePath) ? filePath : path.resolve(baseDir, filePath);
     return await fsReadFile(target, { encoding: 'utf-8' });
 }
-
 // 定义上下文schema
 const contextSchema = z.object({
     skillId: z.string(),
@@ -55,6 +56,7 @@ const agent = createDeepAgent({
     1. web-design-guidelines: 生成符合web设计指南的html文本
     2. pixel-art-css: 生成符合像素艺术风格的css
     3. modern-css: 生成modern风格的css
+    4. html-render: 生成html文件
 
     生成任务完成后不要进行解释，不需要进行概况总结，直接结束任务，只执行用户输入的任务，不进行任何解释。
     
@@ -63,21 +65,34 @@ const agent = createDeepAgent({
     - 如果工具提示结果过大被截断或被写回文件系统，立即改为按页继续读取原文件
     - 只读取与当前任务相关的部分，减少一次性读取长度，避免再次截断
     `,
-    // interruptOn: {
-    //     write_file: true,
-    //     edit_file: true,
-    //     delete_file: false,
-    //     read_file: true,
-    // },
-    backend: new FilesystemBackend({ rootDir: path.dirname(fileURLToPath(import.meta.url)), virtualMode: true }),
+    backend: (config) => {
+        const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+        const skillsRoot = path.join(projectRoot, 'skills');
+        const workspaceRoot = path.join(projectRoot, 'workspace');
+        return new CompositeBackend(
+            new StateBackend(config),
+            {
+                "/skills/": new FilesystemBackend({
+                    rootDir: skillsRoot,
+                    virtualMode: true,
+                }),
+                "/workspace/": new FilesystemBackend({
+                    rootDir: workspaceRoot,
+                    virtualMode: true,
+                }),
+                "/memories/": new StoreBackend(config),
+            }
+        );
+    },
+    store: new InMemoryStore(),
+    checkpointer: new MemorySaver(),
     skills: ['/skills/'],
-    // middleware: [dynamicPromptMiddleware],
-    // contextSchema,
 });
 
 const render = async () => {
     const time = new Date().getTime();
     const usageTotals = { prompt: 0, completion: 0, total: 0 };
+    const threadId = `skill-run-${Date.now()}`;
     const callbacks = [{
         handleLLMEnd: async (output) => {
             const u = output?.llmOutput?.tokenUsage || output?.llmOutput?.usage || {};
@@ -92,14 +107,19 @@ const render = async () => {
     const resume = await readFileUtf8('虚拟人物简历.md');
     const result = await agent.stream({
         messages: [
+            // new HumanMessage({
+            //     content: '你有哪些skill,每个skill的功能是什么?'
+            // })
             createHtmlMessage({
                 text: resume,
-                fileName: 'test14.html',
+                fileName: 'test15.html',
                 skill: 'html-render',
             }),
         ]
     }, {
-        streamMode: 'values', callbacks
+        streamMode: 'values',
+        callbacks,
+        configurable: { thread_id: threadId }
     });
     for await (const chunk of result) {
         for (const message of chunk.messages) {
