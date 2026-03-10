@@ -1,5 +1,5 @@
-import { qwenPlus, qwenCoderPlus, qwenCoderFlash } from './model.js';
 import { createDeepAgent, FilesystemBackend, CompositeBackend, StateBackend, StoreBackend } from 'deepagents';
+import { qwenPlus, qwenCoderPlus, qwenCoderFlash,OllamaCoder,qwen3Max } from './model.js';
 import { HumanMessage, AIMessage, ToolMessage, SystemMessage } from '@langchain/core/messages';
 import { MemorySaver } from '@langchain/langgraph';
 import { InMemoryStore } from '@langchain/langgraph-checkpoint';
@@ -49,7 +49,7 @@ const contextSchema = z.object({
 // });
 
 const agent = createDeepAgent({
-    model: qwenPlus,
+    model: qwen3Max,
     systemPrompt: `
     你是一个文本生成助手
     你可以使用的skill如下:
@@ -88,6 +88,8 @@ const agent = createDeepAgent({
     checkpointer: new MemorySaver(),
     skills: ['/skills/'],
 });
+
+const agentRunner = agent.withConfig({ recursionLimit: 100 });
 
 const render = async () => {
     const time = new Date().getTime();
